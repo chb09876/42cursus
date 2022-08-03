@@ -1,0 +1,6 @@
+test
+*.out
+*.gch
+*.o
+main.c
+.vscode
