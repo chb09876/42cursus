@@ -1,28 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/10 21:19:03 by hacho             #+#    #+#             */
-/*   Updated: 2022/08/10 22:31:08 by hacho            ###   ########.fr       */
+/*   Created: 2022/08/10 22:35:40 by hacho             #+#    #+#             */
+/*   Updated: 2022/08/10 22:52:42 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include <stdlib.h>
+#include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+static int	count_token(const char *s, char delimiter);
+
+char	**ft_split(char const *s, char c)
 {
-	const size_t	s1_len = ft_strlen(s1);
-	const size_t	s2_len = ft_strlen(s2);
-	const char		*new_str = \
-		malloc((s1_len + s2_len + 1) * sizeof(char));
+	const size_t	token_number = count_token(s, c);
 
-	if (new_str == NULL)
-		return (NULL);
-	ft_strlcpy(new_str, s1, s1_len + 1);
-	ft_strlcpy(new_str + s1_len, s2, s2_len + 1);
-	return (new_str);
+	
+}
+
+static int	count_token(const char *s, char delimiter)
+{
+	int	count;
+
+	count = 0;
+	while (*s)
+	{
+		while (*s == delimiter)
+			++s;
+		if (*s != '\0')
+			++count;
+		while (*s != delimiter && *s != '\0')
+			++s;
+	}
+	return (count);
 }
