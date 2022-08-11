@@ -1,25 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/10 18:33:38 by hacho             #+#    #+#             */
-/*   Updated: 2022/08/11 21:24:22 by hacho            ###   ########.fr       */
+/*   Created: 2022/08/11 20:52:41 by hacho             #+#    #+#             */
+/*   Updated: 2022/08/11 21:30:10 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-void	*ft_strdup(const char *s1)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	const size_t	len = ft_strlen(s1);
-	const char		*new_str = malloc(len * sizeof(char) + 1);
+	t_list	**new_lst;
+	t_list	*new;
 
-	if (new_str == NULL)
-		return (NULL);
-	ft_strlcpy((char *)new_str, s1, (len + 1) * sizeof(char));
-	return ((void *)new_str);
+	if (lst)
+	{
+		new = ft_lstnew(f(lst->content));
+		if (new == NULL)
+			return (NULL);
+		new_lst = &new;
+		lst = lst->next;
+	}
+	while (lst)
+	{
+		new->next = ft_lstnew(f(lst->content));
+		if (new->next == NULL)
+		{
+			ft_lstclear(new_lst, del);
+			break ;
+		}
+		new = new->next;
+		lst = lst->next;
+	}
+	return (*new_lst);
 }

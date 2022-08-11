@@ -6,7 +6,7 @@
 /*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 20:39:26 by hacho             #+#    #+#             */
-/*   Updated: 2022/08/10 18:39:57 by hacho            ###   ########.fr       */
+/*   Updated: 2022/08/11 21:28:45 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	while (*haystack && len)
 	{
 		if (ft_strncmp(haystack, needle, needle_len) == 0)
-			return (haystack);
+			return ((char *)haystack);
 		--len;
 		++haystack;
 	}

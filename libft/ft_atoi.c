@@ -6,7 +6,7 @@
 /*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 21:03:49 by hacho             #+#    #+#             */
-/*   Updated: 2022/08/10 20:03:02 by hacho            ###   ########.fr       */
+/*   Updated: 2022/08/11 21:19:42 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,8 @@ static int	check_overflow(
 				int cutlim,
 				unsigned long cutoff)
 {
-	if (result > cutoff || (result == cutoff && (c - '0') > cutlim))
+	if ((unsigned long)result > cutoff || \
+		((unsigned long)result == cutoff && (c - '0') > cutlim))
 		return (1);
 	return (0);
-}
-#include <stdio.h>
-int main()
-{
-	printf("%d", ft_atoi("1234"));
 }

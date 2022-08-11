@@ -6,12 +6,14 @@
 /*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 21:29:54 by hacho             #+#    #+#             */
-/*   Updated: 2022/08/10 22:32:33 by hacho            ###   ########.fr       */
+/*   Updated: 2022/08/11 21:29:51 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
+
+int	is_set(char c, char const *set);
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
@@ -31,7 +33,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	else
 		trimmed_str_len = trim_end - trim_start + 2;
 	trimmed_str = malloc(trimmed_str_len * sizeof(char));
-	if (trim_start == NULL)
+	if (trimmed_str == NULL)
 		return (NULL);
 	ft_strlcpy(trimmed_str, s1 + trim_start, trimmed_str_len);
 	return (trimmed_str);
