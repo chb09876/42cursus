@@ -6,7 +6,7 @@
 /*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 22:35:40 by hacho             #+#    #+#             */
-/*   Updated: 2022/08/11 21:23:52 by hacho            ###   ########.fr       */
+/*   Updated: 2022/08/13 20:25:47 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	**ft_split(char const *s, char c)
 	splited = malloc(sizeof(char **) * (token_number + 1));
 	if (splited == NULL)
 		return (NULL);
-	if (split_word(splited, s, c, token_number))
+	if (split_word(splited, (char *)s, c, token_number) == 0)
 	{
 		free(splited);
 		return (NULL);
@@ -55,7 +55,7 @@ static size_t	count_token(const char *s, char delimiter)
 
 static int	split_word(
 				char **splited,
-				char const *src,
+				const char *src,
 				char delimiter,
 				size_t count)
 {
@@ -68,14 +68,14 @@ static int	split_word(
 		while (*src == delimiter)
 			++src;
 		tmp = (char *)src;
-		while (*src != delimiter)
+		while (*src != delimiter && *src)
 			++src;
 		splited[i] = malloc(sizeof(char) * (src - tmp + 1));
 		if (splited[i] == NULL)
 		{
 			while (i)
 				free(splited[--i]);
-			return (-1);
+			return (0);
 		}
 		ft_strlcpy(splited[i], tmp, src - tmp + 1);
 		i++;

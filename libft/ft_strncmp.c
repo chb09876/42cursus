@@ -6,7 +6,7 @@
 /*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 17:20:15 by hacho             #+#    #+#             */
-/*   Updated: 2022/08/10 18:39:47 by hacho            ###   ########.fr       */
+/*   Updated: 2022/08/13 22:21:02 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	while (n && *s1 == *s2)
+	while (n && *s1 == *s2 && *s1 && *s2)
 	{
 		++s1;
 		++s2;

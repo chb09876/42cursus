@@ -6,7 +6,7 @@
 /*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 20:22:59 by hacho             #+#    #+#             */
-/*   Updated: 2022/08/11 20:23:39 by hacho            ###   ########.fr       */
+/*   Updated: 2022/08/13 21:27:21 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 
 t_list	*ft_lstlast(t_list *lst)
 {
-	while (lst->next)
+	while (lst)
+	{
+		if (lst->next == NULL)
+			break ;
 		lst = lst->next;
+	}
 	return (lst);
 }

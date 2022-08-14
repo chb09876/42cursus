@@ -6,7 +6,7 @@
 /*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 17:15:06 by hacho             #+#    #+#             */
-/*   Updated: 2022/08/11 21:21:09 by hacho            ###   ########.fr       */
+/*   Updated: 2022/08/14 20:34:43 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,33 @@
 #include "libft.h"
 
 static size_t	get_len_unsigned_int(unsigned int n);
-static void		unsigned_int_to_string(char *str, unsigned int n, int neg);
+static void		unsigned_int_to_string(
+					char *str,
+					size_t len,
+					unsigned int n);
 
 char	*ft_itoa(int n)
 {
 	int				neg;
-	unsigned int	tmp;
+	unsigned int	unsigned_n;
 	char			*str;
+	size_t			len;
 
 	neg = 0;
 	if (n < 0)
+	{
 		neg = 1;
-	tmp = -((unsigned int)n);
-	str = malloc(sizeof(char) * (get_len_unsigned_int(tmp) + neg + 1));
+		unsigned_n = -n;
+	}
+	else
+		unsigned_n = n;
+	len = get_len_unsigned_int(unsigned_n) + neg;
+	str = malloc(sizeof(char) * (len + 1));
 	if (str == NULL)
 		return (NULL);
 	if (neg)
 		str[0] = '-';
-	unsigned_int_to_string(str, tmp, neg);
+	unsigned_int_to_string(str, len, unsigned_n);
 	return (str);
 }
 
@@ -50,20 +59,20 @@ static size_t	get_len_unsigned_int(unsigned int n)
 	return (i);
 }
 
-static void	unsigned_int_to_string(char *str, unsigned int n, int neg)
+static void	unsigned_int_to_string(
+						char *str,
+						size_t len,
+						unsigned int n)
 {
-	size_t	i;
-
-	i = neg;
+	str[len] = '\0';
 	if (n == 0)
-		str[i++] = '0';
+		str[--len] = '0';
 	else
 	{
 		while (n)
 		{
-			str[i++] = n % 10 + '0';
+			str[--len] = n % 10 + '0';
 			n /= 10;
 		}
 	}
-	str[i] = '\0';
 }

@@ -6,14 +6,14 @@
 /*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 18:33:38 by hacho             #+#    #+#             */
-/*   Updated: 2022/08/11 21:24:22 by hacho            ###   ########.fr       */
+/*   Updated: 2022/08/13 19:38:07 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-void	*ft_strdup(const char *s1)
+char	*ft_strdup(const char *s1)
 {
 	const size_t	len = ft_strlen(s1);
 	const char		*new_str = malloc(len * sizeof(char) + 1);

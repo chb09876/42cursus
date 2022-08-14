@@ -6,7 +6,7 @@
 /*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 17:49:22 by hacho             #+#    #+#             */
-/*   Updated: 2022/08/11 18:01:28 by hacho            ###   ########.fr       */
+/*   Updated: 2022/08/13 20:29:51 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	mapped = malloc(sizeof(char) * (ft_strlen(s) + 1));
 	if (mapped == NULL)
 		return (NULL);
+	mapped[s_len] = '\0';
 	while (s_len)
 	{
 		--s_len;

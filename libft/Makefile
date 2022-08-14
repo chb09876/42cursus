@@ -3,7 +3,7 @@ NAME	= libft.a
 CC		= cc
 CFLAGS	= -Wall -Wextra -Werror
 
-FILES 	=		ft_atoi.c \
+SRCS 	=		ft_atoi.c \
 				ft_bzero.c \
 				ft_calloc.c \
 				ft_isalnum.c \
@@ -38,7 +38,7 @@ FILES 	=		ft_atoi.c \
 				ft_tolower.c \
 				ft_toupper.c
 
-FILES_BONUS = 	ft_lstadd_back.c \
+SRCS_BONUS = 	ft_lstadd_back.c \
 				ft_lstadd_front.c \
 				ft_lstclear.c \
 				ft_lstdelone.c \
@@ -48,8 +48,8 @@ FILES_BONUS = 	ft_lstadd_back.c \
 				ft_lstnew.c \
 				ft_lstsize.c
 
-OBJS		= $(FILES:.c=.o)
-OBJS_BONUS 	= $(FILES_BONUS:.c=.o)
+OBJS		= $(SRCS:.c=.o)
+OBJS_BONUS 	= $(SRCS_BONUS:.c=.o)
 
 AR		= ar -crs
 RM		= rm -f
