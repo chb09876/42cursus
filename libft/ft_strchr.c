@@ -6,9 +6,11 @@
 /*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 19:47:03 by hacho             #+#    #+#             */
-/*   Updated: 2022/08/03 17:10:24 by hacho            ###   ########.fr       */
+/*   Updated: 2022/08/15 18:55:34 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 char	*ft_strchr(const char *s, int c)
 {

@@ -6,11 +6,11 @@
 /*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 19:29:32 by hacho             #+#    #+#             */
-/*   Updated: 2022/08/02 17:11:53 by hacho            ###   ########.fr       */
+/*   Updated: 2022/08/15 18:56:11 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "libft.h"
 
 size_t	ft_strlen(const char *s)
 {

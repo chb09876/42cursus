@@ -6,12 +6,12 @@
 /*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 21:19:03 by hacho             #+#    #+#             */
-/*   Updated: 2022/08/13 19:00:46 by hacho            ###   ########.fr       */
+/*   Updated: 2022/08/15 18:55:50 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include <stdlib.h>
+#include "libft.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {

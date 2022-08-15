@@ -6,11 +6,10 @@
 /*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 20:39:25 by hacho             #+#    #+#             */
-/*   Updated: 2022/08/13 22:46:04 by hacho            ###   ########.fr       */
+/*   Updated: 2022/08/15 18:53:26 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
 void	ft_lstclear(t_list **lst, void (*del)(void *))

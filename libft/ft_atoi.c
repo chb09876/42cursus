@@ -6,11 +6,12 @@
 /*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 21:03:49 by hacho             #+#    #+#             */
-/*   Updated: 2022/08/14 18:42:55 by hacho            ###   ########.fr       */
+/*   Updated: 2022/08/15 18:52:16 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <limits.h>
+#include "libft.h"
 
 static int	is_space(char c);
 static int	check_sign(const char **str);

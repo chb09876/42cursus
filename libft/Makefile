@@ -1,6 +1,6 @@
 NAME	= libft.a
 
-CC		= cc
+CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror
 
 SRCS 	=		ft_atoi.c \
@@ -51,8 +51,8 @@ SRCS_BONUS = 	ft_lstadd_back.c \
 OBJS		= $(SRCS:.c=.o)
 OBJS_BONUS 	= $(SRCS_BONUS:.c=.o)
 
-AR		= ar -crs
-RM		= rm -f
+ARCHIVE		= ar -crs
+REMOVE		= rm -f
 
 ifdef WITH_BONUS
 			OBJECTS	= $(OBJS) $(OBJS_BONUS)
@@ -61,19 +61,18 @@ else
 endif
 
 all		:	$(NAME)
-			sleep 1
 
 $(NAME)	:	$(OBJECTS)
-			$(AR) $(NAME) $(OBJECTS)
+			$(ARCHIVE) $(NAME) $(OBJECTS)
 
 bonus	:
 			make WITH_BONUS=1 all
 
 clean	:
-			$(RM) $(OBJS) $(OBJS_BONUS)
+			$(REMOVE) $(OBJS) $(OBJS_BONUS)
 
 fclean	:	clean
-			$(RM) $(NAME)
+			$(REMOVE) $(NAME)
 
 re		:
 			make fclean
