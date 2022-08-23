@@ -6,7 +6,7 @@
 /*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 20:52:41 by hacho             #+#    #+#             */
-/*   Updated: 2022/08/15 18:54:05 by hacho            ###   ########.fr       */
+/*   Updated: 2022/08/23 17:34:50 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	t_list	*new;
 	void	*f_result;
 
-	if (!lst || !f || !del)
+	if (!lst)
 		return (NULL);
 	f_result = f(lst->content);
 	new = ft_lstnew(f_result);

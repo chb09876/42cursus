@@ -6,14 +6,14 @@
 /*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 21:29:54 by hacho             #+#    #+#             */
-/*   Updated: 2022/08/15 18:56:33 by hacho            ###   ########.fr       */
+/*   Updated: 2022/08/23 17:36:17 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-int	is_set(char c, char const *set);
+static int	is_set(char c, char const *set);
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
@@ -39,7 +39,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	return (trimmed_str);
 }
 
-int	is_set(char c, char const *set)
+static int	is_set(char c, char const *set)
 {
 	size_t	i;
 

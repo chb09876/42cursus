@@ -6,7 +6,7 @@
 /*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 18:33:38 by hacho             #+#    #+#             */
-/*   Updated: 2022/08/15 18:55:40 by hacho            ###   ########.fr       */
+/*   Updated: 2022/08/23 15:24:45 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 char	*ft_strdup(const char *s1)
 {
 	const size_t	len = ft_strlen(s1);
-	const char		*new_str = malloc(len * sizeof(char) + 1);
+	const char		*new_str = malloc((len + 1) * sizeof(char));
 
 	if (new_str == NULL)
 		return (NULL);
 	ft_strlcpy((char *)new_str, s1, (len + 1) * sizeof(char));
-	return ((void *)new_str);
+	return ((char *)new_str);
 }
