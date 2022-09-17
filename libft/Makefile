@@ -54,12 +54,6 @@ OBJS_BONUS 	= $(SRCS_BONUS:.c=.o)
 ARCHIVE		= ar -crs
 REMOVE		= rm -f
 
-ifdef WITH_BONUS
-			OBJECTS	= $(OBJS) $(OBJS_BONUS)
-else
-			OBJECTS	= $(OBJS)
-endif
-
 all		:	$(NAME)
 
 $(NAME)	:	$(OBJECTS)
