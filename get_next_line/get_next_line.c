@@ -6,7 +6,7 @@
 /*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 19:22:02 by hacho             #+#    #+#             */
-/*   Updated: 2022/09/19 22:16:14 by hacho            ###   ########.fr       */
+/*   Updated: 2022/09/21 17:47:10 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,58 @@
 #include <stdlib.h>
 #include "get_next_line.h"
 
-char	*get_next_line(int fd)
-{
-	static t_read_status	read_status;
-	char					*temp;
+static t_gnl_state gnl_read(int fd, char **line);
 
-	// 1. read data since Buffer is full or meet EOF.
-	gnl_read(fd, &read_status);
-	if (read_status.state == READ_STATE_DONE)
-		return (read_status.line);
-	else if (read_status.read_len == -1)
-		return (NULL);
-	// 2. copy at container with Buffer.
-	while (read_status.read_len >= 0)
+char *get_next_line(int fd)
+{
+	t_gnl_state gnl_state;
+	char *gnl_line;
+
+	gnl_state = GNL_STATE_INIT;
+	gnl_line = NULL;
+	while (gnl_state == GNL_STATE_INIT || gnl_state == GNL_STATE_READING)
+		gnl_state = gnl_read(fd, &gnl_line);
+	if (gnl_state == GNL_STATE_DONE || gnl_state == GNL_STATE_EOF)
+		return (gnl_line);
+	else if (gnl_state == GNL_STATE_ERROR)
 	{
-		if (status.line == NULL)
-		{
-			status.line = ft_strdup("");
-			if (status.line == NULL)
-				return (NULL);
-		}
-		temp = status.line;
-		status.line = ft_bufjoin(status.line, status.buffer, status.read_len);
-		if (status.line == NULL)
-			return (NULL);
-		free(temp);
-		if (status.read_len == 0)
-			return (status.line);
-		status.read_len = read(fd, status.buffer, BUFFER_SIZE);
+		free(gnl_line);
+		return (NULL);
 	}
-	free(status.line);
-	return (NULL);
 }
 
+static t_gnl_state gnl_read(int fd, char **line)
+{
+	static t_read_buffer buf;
+	char *temp;
 
+	if (buf.offset == buf.read_size)
+	{
+		buf.read_size = read(fd, buf.buffer, BUFFER_SIZE);
+		buf.offset = 0;
+		if (buf.read_size == -1)
+			return (GNL_STATE_ERROR);
+		else if (buf.read_size == 0)
+			return (GNL_STATE_EOF);
+	}
+	if (gnl_concat(line, &buf) == 1)
+
+		return (GNL_STATE_DONE);
+	return (GNL_STATE_READING);
+}
+
+int gnl_concat(char **line, t_read_buffer *buf)
+{
+	int next_offset;
+
+	next_offset = buf->offset;
+	while (next_offset != buf->read_size || buf->buffer[next_offset] != '\n')
+		++next_offset;
+	if (*line == NULL)
+	{
+		*line = malloc((next_offset - buf->offset) * sizeof(char));
+	}
+	else
+	{
+	}
+}

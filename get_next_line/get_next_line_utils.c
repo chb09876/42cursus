@@ -6,17 +6,17 @@
 /*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 17:15:17 by hacho             #+#    #+#             */
-/*   Updated: 2022/09/19 18:55:28 by hacho            ###   ########.fr       */
+/*   Updated: 2022/09/20 18:31:33 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 #include <stdlib.h>
 
-char	*ft_bufjoin(char const *s1, char const *s2, int read_len)
+char *ft_strjoin(char const *s1, char const *s2, int read_len)
 {
-	const size_t	s1_len = ft_strlen(s1);
-	char			*new_str;
+	const size_t s1_len = ft_strlen(s1);
+	char *new_str;
 
 	new_str = malloc((s1_len + read_len + 1) * sizeof(char));
 	if (new_str == NULL)
@@ -26,9 +26,9 @@ char	*ft_bufjoin(char const *s1, char const *s2, int read_len)
 	return (new_str);
 }
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+size_t ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	const char *const	tmp = src;
+	const char *const tmp = src;
 
 	if (dstsize)
 	{
