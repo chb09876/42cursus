@@ -6,7 +6,7 @@
 /*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 19:22:02 by hacho             #+#    #+#             */
-/*   Updated: 2022/09/22 20:55:13 by hacho            ###   ########.fr       */
+/*   Updated: 2022/09/22 20:36:21 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <stdlib.h>
 #include "get_next_line.h"
 
-char				*get_next_line(int fd);
 static t_gnl_state	gnl_read(int fd, t_read_buffer *buf, t_gnl_status *gnl);
 static t_gnl_state	gnl_join(t_gnl_status *gnl, t_read_buffer *buf);
 
