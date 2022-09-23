@@ -1,37 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 17:15:17 by hacho             #+#    #+#             */
-/*   Updated: 2022/09/22 19:35:54 by hacho            ###   ########.fr       */
+/*   Updated: 2022/09/23 15:53:33 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 #include <stdlib.h>
+#include "get_next_line_bonus.h"
 
-size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
-char	*ft_strdup(const char *s1);
-size_t	ft_strlen(const char *s);
-void	*ft_memmove(void *dst, const void *src, size_t len);
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+char			*ft_strdup(const char *s1);
+void			*ft_memmove(void *dst, const void *src, size_t len);
+t_buffer_node	*new_buffer_node(
+					int fd, t_buffer_node *next, t_buffer_node *prev);
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+t_buffer_node	*new_buffer_node(
+					int fd, t_buffer_node *next, t_buffer_node *prev)
 {
-	const char *const	tmp = src;
+	t_buffer_node	*new_node;
 
-	if (dstsize)
-	{
-		while (--dstsize && *src)
-			*((unsigned char *)dst++) = *((unsigned char *)src++);
-		*dst = '\0';
-	}
-	while (*src)
-		++src;
-	return (src - tmp);
+	new_node = malloc(sizeof * new_node);
+	if (new_node == NULL)
+		return (NULL);
+	new_node->buf.offset = 0;
+	new_node->buf.read_size = 0;
+	new_node->fd = fd;
+	new_node->next = next;
+	new_node->prev = prev;
+	return (new_node);
 }
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
@@ -60,20 +61,21 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 
 char	*ft_strdup(const char *s1)
 {
-	const size_t	len = ft_strlen(s1);
-	const char		*new_str = malloc((len + 1) * sizeof(char));
+	size_t	i;
+	char	*new_str;
 
+	i = 0;
+	while (*(s1 + i))
+		++i;
+	new_str = malloc((i + 1) * sizeof * new_str);
 	if (new_str == NULL)
 		return (NULL);
-	ft_strlcpy((char *)new_str, s1, (len + 1) * sizeof(char));
-	return ((char *)new_str);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	const char *const	tmp = s;
-
-	while (*s)
-		++s;
-	return (s - tmp);
+	i = 0;
+	while (s1[i])
+	{
+		new_str[i] = s1[i];
+		++i;
+	}
+	new_str[i] = '\0';
+	return (new_str);
 }
