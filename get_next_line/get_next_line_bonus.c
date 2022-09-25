@@ -1,51 +1,70 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 19:22:02 by hacho             #+#    #+#             */
-/*   Updated: 2022/09/22 20:36:21 by hacho            ###   ########.fr       */
+/*   Updated: 2022/09/23 15:56:06 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
-static t_gnl_state	gnl_read(int fd, t_read_buffer *buf, t_gnl_status *gnl);
-static t_gnl_state	gnl_join(t_gnl_status *gnl, t_read_buffer *buf);
+char			*ft_strdup(const char *s1);
+void			*ft_memmove(void *dst, const void *src, size_t len);
+t_buffer_node	*new_buffer_node(
+					int fd, t_buffer_node *next, t_buffer_node *prev);
+
+t_gnl_state		gnl_read(int fd, t_read_buffer *buf, t_gnl_status *gnl);
+t_gnl_state		gnl_join(t_gnl_status *gnl, t_read_buffer *buf);
+t_buffer_node	*select_buffer(int fd, t_buffer_list *list);
+void			delete_buffer(
+					t_buffer_node *buf_node, t_buffer_list *list);
 
 char	*get_next_line(int fd)
 {
-	static t_read_buffer	buf;
+	static t_buffer_list	buf_list;
+	t_buffer_node			*buf_node;
 	t_gnl_status			gnl;
 
 	gnl.state = GNL_STATE_INIT;
 	gnl.line = NULL;
 	gnl.length = 0;
+	buf_node = select_buffer(fd, &buf_list);
+	if (buf_node == NULL)
+		return (NULL);
 	while (gnl.state == GNL_STATE_INIT || gnl.state == GNL_STATE_READING)
-		gnl.state = gnl_read(fd, &buf, &gnl);
+		gnl.state = gnl_read(fd, &(buf_node->buf), &gnl);
 	if (gnl.state == GNL_STATE_DONE || gnl.state == GNL_STATE_EOF)
+	{
+		if (gnl.state == GNL_STATE_EOF)
+			delete_buffer(buf_node, &buf_list);
 		return (gnl.line);
+	}
 	if (gnl.state == GNL_STATE_ERROR)
 	{
 		free(gnl.line);
-		buf.read_size = 0;
+		delete_buffer(buf_node, &buf_list);
 		return (NULL);
 	}
 	return (NULL);
 }
 
-static t_gnl_state	gnl_read(int fd, t_read_buffer *buf, t_gnl_status *gnl)
+t_gnl_state	gnl_read(int fd, t_read_buffer *buf, t_gnl_status *gnl)
 {
 	if (buf->offset == buf->read_size)
 	{
 		buf->read_size = read(fd, buf->buffer, BUFFER_SIZE);
 		buf->offset = 0;
 		if (buf->read_size == -1)
+		{
+			buf->read_size = 0;
 			return (GNL_STATE_ERROR);
+		}
 		if (buf->read_size == 0)
 			return (GNL_STATE_EOF);
 	}
@@ -56,7 +75,7 @@ static t_gnl_state	gnl_read(int fd, t_read_buffer *buf, t_gnl_status *gnl)
 	return (gnl_join(gnl, buf));
 }
 
-static t_gnl_state	gnl_join(t_gnl_status *gnl, t_read_buffer *buf)
+t_gnl_state	gnl_join(t_gnl_status *gnl, t_read_buffer *buf)
 {
 	int		next_offset;
 	char	*temp;
@@ -83,4 +102,37 @@ static t_gnl_state	gnl_join(t_gnl_status *gnl, t_read_buffer *buf)
 	if (buf->buffer[buf->offset - 1] == '\n')
 		return (GNL_STATE_DONE);
 	return (GNL_STATE_READING);
+}
+
+t_buffer_node	*select_buffer(int fd, t_buffer_list *list)
+{
+	t_buffer_node	*node;
+
+	if (list->head == NULL)
+	{
+		list->head = new_buffer_node(fd, NULL, NULL);
+		if (list->head == NULL)
+			return (NULL);
+		return (list->head);
+	}
+	node = list->head;
+	while (node->next && node->fd != fd)
+		node = node->next;
+	if (node->fd == fd)
+		return (node);
+	node->next = new_buffer_node(fd, NULL, node);
+	if (node->next == NULL)
+		return (NULL);
+	return (node->next);
+}
+
+void	delete_buffer(t_buffer_node *buf_node, t_buffer_list *list)
+{
+	if (buf_node == list->head)
+		list->head = buf_node->next;
+	if (buf_node->prev != NULL)
+		buf_node->prev->next = buf_node->next;
+	if (buf_node->next != NULL)
+		buf_node->next->prev = buf_node->prev;
+	free(buf_node);
 }

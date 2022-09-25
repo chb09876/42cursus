@@ -6,33 +6,15 @@
 /*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 17:15:17 by hacho             #+#    #+#             */
-/*   Updated: 2022/09/22 19:35:54 by hacho            ###   ########.fr       */
+/*   Updated: 2022/09/23 15:56:57 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 #include <stdlib.h>
 
-size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 char	*ft_strdup(const char *s1);
-size_t	ft_strlen(const char *s);
 void	*ft_memmove(void *dst, const void *src, size_t len);
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
-
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
-{
-	const char *const	tmp = src;
-
-	if (dstsize)
-	{
-		while (--dstsize && *src)
-			*((unsigned char *)dst++) = *((unsigned char *)src++);
-		*dst = '\0';
-	}
-	while (*src)
-		++src;
-	return (src - tmp);
-}
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
@@ -60,20 +42,21 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 
 char	*ft_strdup(const char *s1)
 {
-	const size_t	len = ft_strlen(s1);
-	const char		*new_str = malloc((len + 1) * sizeof(char));
+	size_t	i;
+	char	*new_str;
 
+	i = 0;
+	while (*(s1 + i))
+		++i;
+	new_str = malloc((i + 1) * sizeof * new_str);
 	if (new_str == NULL)
 		return (NULL);
-	ft_strlcpy((char *)new_str, s1, (len + 1) * sizeof(char));
-	return ((char *)new_str);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	const char *const	tmp = s;
-
-	while (*s)
-		++s;
-	return (s - tmp);
+	i = 0;
+	while (s1[i])
+	{
+		new_str[i] = s1[i];
+		++i;
+	}
+	new_str[i] = '\0';
+	return (new_str);
 }

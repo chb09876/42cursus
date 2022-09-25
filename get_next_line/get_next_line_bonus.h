@@ -6,7 +6,7 @@
 /*   By: hacho <hacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 17:04:36 by hacho             #+#    #+#             */
-/*   Updated: 2022/09/25 15:50:52 by hacho            ###   ########.fr       */
+/*   Updated: 2022/09/25 15:53:41 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,19 @@ typedef struct s_gnl_status
 	int			length;
 }	t_gnl_status;
 
-char	*get_next_line(int fd);
+typedef struct s_buffer_node
+{
+	int						fd;
+	t_read_buffer			buf;
+	struct s_buffer_node	*next;
+	struct s_buffer_node	*prev;
+}	t_buffer_node;
 
-size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
-char	*ft_strdup(const char *s1);
-size_t	ft_strlen(const char *s);
-void	*ft_memmove(void *dst, const void *src, size_t n);
+typedef struct s_buffer_list
+{
+	t_buffer_node	*head;
+}	t_buffer_list;
+
+char	*get_next_line(int fd);
 
 #endif
