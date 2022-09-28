@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hacho <hacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 19:22:02 by hacho             #+#    #+#             */
-/*   Updated: 2022/09/23 15:56:56 by hacho            ###   ########.fr       */
+/*   Updated: 2022/09/27 02:23:50 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 #include <stdlib.h>
 #include "get_next_line.h"
 
-t_gnl_state	gnl_read(int fd, t_read_buffer *buf, t_gnl_status *gnl);
-t_gnl_state	gnl_join(t_gnl_status *gnl, t_read_buffer *buf);
+char				*ft_strdup(const char *s1);
+void				*ft_memmove(void *dst, const void *src, size_t len);
+static t_gnl_state	gnl_read(int fd, t_read_buffer *buf, t_gnl_status *gnl);
+static t_gnl_state	gnl_join(t_gnl_status *gnl, t_read_buffer *buf);
 
 char	*get_next_line(int fd)
 {
@@ -38,7 +40,7 @@ char	*get_next_line(int fd)
 	return (NULL);
 }
 
-t_gnl_state	gnl_read(int fd, t_read_buffer *buf, t_gnl_status *gnl)
+static t_gnl_state	gnl_read(int fd, t_read_buffer *buf, t_gnl_status *gnl)
 {
 	if (buf->offset == buf->read_size)
 	{
@@ -56,7 +58,7 @@ t_gnl_state	gnl_read(int fd, t_read_buffer *buf, t_gnl_status *gnl)
 	return (gnl_join(gnl, buf));
 }
 
-t_gnl_state	gnl_join(t_gnl_status *gnl, t_read_buffer *buf)
+static t_gnl_state	gnl_join(t_gnl_status *gnl, t_read_buffer *buf)
 {
 	int		next_offset;
 	char	*temp;

@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hacho <hacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/22 17:13:10 by hacho             #+#    #+#             */
-/*   Updated: 2022/09/22 17:56:49 by hacho            ###   ########.fr       */
+/*   Created: 2022/09/25 22:37:11 by hacho             #+#    #+#             */
+/*   Updated: 2022/09/26 21:23:08 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include "get_next_line.h"
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-int main()
-{
-	int fd = open("test.txt", O_RDONLY);
-	printf("%s\n", get_next_line(fd));
-	// printf("%s", get_next_line(fd));
-}
+# include <stdarg.h>
+
+typedef struct s_args {
+	va_list	ap;
+	int		count;
+}	t_args;
+
+int	ft_printf(const char *format, ...);
+
+#endif
