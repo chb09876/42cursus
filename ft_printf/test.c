@@ -2,5 +2,5 @@
 
 int main()
 {
-	printf(NULL);
+	printf("%d", printf("%120c", 'a'));
 }

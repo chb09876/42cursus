@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hacho <hacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 17:15:17 by hacho             #+#    #+#             */
-/*   Updated: 2022/09/23 15:53:33 by hacho            ###   ########.fr       */
+/*   Updated: 2022/09/25 16:06:47 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
 #include <stdlib.h>
 #include "get_next_line_bonus.h"
 

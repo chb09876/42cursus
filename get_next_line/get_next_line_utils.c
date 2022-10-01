@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hacho <hacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 17:15:17 by hacho             #+#    #+#             */
-/*   Updated: 2022/09/23 15:56:57 by hacho            ###   ########.fr       */
+/*   Updated: 2022/09/25 16:06:21 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
 #include <stdlib.h>
 
 char	*ft_strdup(const char *s1);
