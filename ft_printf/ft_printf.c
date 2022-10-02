@@ -6,7 +6,7 @@
 /*   By: hacho <hacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 22:36:43 by hacho             #+#    #+#             */
-/*   Updated: 2022/09/29 21:11:55 by hacho            ###   ########.fr       */
+/*   Updated: 2022/10/02 17:27:11 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,32 +59,35 @@ ssize_t	print_ordinary_characters(const char **format)
 	return (write_bytes);
 }
 
+// 플래그들에 비트마스크???
+
 ssize_t	print_conversion_specification(const char **format, va_list *ap)
 {
-	t_options	options;
+	t_options	opt;
 
-	init_options(&options);
-	set_options(format, &options);
-	if (*format == 'c')
-		return (print_character(va_arg(*ap, char), &options));
-	if (*format == 's')
-		return (print_string(va_arg(*ap, char *), &options));
-	if (*format == 'p')
-		return (print_pointer_in_hex(va_arg(*ap, void *), &options));
-	if (*format == 'd')
-		return (print_decimal(va_arg(*ap, int), &options));
-	if (*format == 'i')
-		return (print_integer(va_arg(*ap, int), &options));
-	if (*format == 'u')
-		return (print_unsigned_decimal(va_arg(*ap, unsigned int), &options));
-	if (*format == 'x')
-		return (print_num_in_hex_lower(va_arg(*ap, int), &options));
-	if (*format == 'X')
-		return (print_num_in_hex_upper(va_arg(*ap, int), &options));
-	if (*format == '%')
-		return (print_percent(va_arg(*ap, char), &options));
+	init_options(&opt);
+	set_options(format, &opt);
+	if (**format == 'c')
+		return (print_character(va_arg(*ap, char), &opt));
+	if (**format == 's')
+		return (print_string(va_arg(*ap, char *), &opt));
+	if (**format == 'p')
+		return (print_pointer_in_hex(va_arg(*ap, void *), &opt));
+	if (**format == 'd')
+		return (print_decimal(va_arg(*ap, int), &opt));
+	if (**format == 'i')
+		return (print_integer(va_arg(*ap, int), &opt));
+	if (**format == 'u')
+		return (print_unsigned_decimal(va_arg(*ap, unsigned int), &opt));
+	if (**format == 'x')
+		return (print_num_in_hex_lower(va_arg(*ap, int), &opt));
+	if (**format == 'X')
+		return (print_num_in_hex_upper(va_arg(*ap, int), &opt));
+	if (**format == '%')
+		return (print_percent(&opt));
 	return (-1);
 }
+
 
 int main()
 {
