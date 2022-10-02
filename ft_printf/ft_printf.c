@@ -6,7 +6,7 @@
 /*   By: hacho <hacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 22:36:43 by hacho             #+#    #+#             */
-/*   Updated: 2022/09/28 18:16:54 by hacho            ###   ########.fr       */
+/*   Updated: 2022/09/29 21:11:55 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@
 #include "ft_printf.h"
 
 int		validate_format(const char *format);
-ssize_t	print_conversion_specifiers(const char **format, va_list *ap);
+ssize_t	print_conversion_specification(const char **format, va_list *ap);
 ssize_t	print_ordinary_characters(const char **format);
+ssize_t	print_character(char c, &options);
 
 int	ft_printf(const char *format, ...)
 {
@@ -58,33 +59,32 @@ ssize_t	print_ordinary_characters(const char **format)
 	return (write_bytes);
 }
 
-// 플래그들에 비트마스크???
-
-ssize_t	print_conversion_specification(const char **format)
+ssize_t	print_conversion_specification(const char **format, va_list *ap)
 {
-	*format += 2;
-	if (*(format - 1) == 'c')
-		return (print_character());
-	if (*(format - 1) == 's')
-		return (print_string());
-	if (*(format - 1) == 'p')
-		return (print_pointer_in_hex());
-	if (*(format - 1) == 'd')
-		return (print_decimal());
-	if (*(format - 1) == 'i')
-		return (print_integer());
-	if (*(format - 1) == 'u')
-		return (print_unsigned_decimal());
-	if (*(format - 1) == 'x')
-		return (print_num_in_hex_lower());
-	if (*(format - 1) == 'X')
-		return (print_num_in_hex_upper());
-	if (*(format - 1) == '%')
-		return (print_percent());
+	t_options	options;
+
+	init_options(&options);
+	set_options(format, &options);
+	if (*format == 'c')
+		return (print_character(va_arg(*ap, char), &options));
+	if (*format == 's')
+		return (print_string(va_arg(*ap, char *), &options));
+	if (*format == 'p')
+		return (print_pointer_in_hex(va_arg(*ap, void *), &options));
+	if (*format == 'd')
+		return (print_decimal(va_arg(*ap, int), &options));
+	if (*format == 'i')
+		return (print_integer(va_arg(*ap, int), &options));
+	if (*format == 'u')
+		return (print_unsigned_decimal(va_arg(*ap, unsigned int), &options));
+	if (*format == 'x')
+		return (print_num_in_hex_lower(va_arg(*ap, int), &options));
+	if (*format == 'X')
+		return (print_num_in_hex_upper(va_arg(*ap, int), &options));
+	if (*format == '%')
+		return (print_percent(va_arg(*ap, char), &options));
 	return (-1);
 }
-
-ssize_t	
 
 int main()
 {
