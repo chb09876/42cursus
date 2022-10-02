@@ -2,5 +2,7 @@
 
 int main()
 {
-	printf("%d", printf("%120c", 'a'));
+	int a = 10;
+	int *p = &a;
+	printf("%.10-d", 12);
 }
