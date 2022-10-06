@@ -5,55 +5,44 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/01 17:25:41 by hacho             #+#    #+#             */
-/*   Updated: 2022/10/01 23:15:37 by hacho            ###   ########.fr       */
+/*   Created: 2022/10/03 22:01:38 by hacho             #+#    #+#             */
+/*   Updated: 2022/10/04 01:00:05 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdarg.h>
 #include <sys/types.h>
+#include <stdarg.h>
 #include "ft_printf.h"
 
-void	init_options(t_options *opt)
+ssize_t	print_character(char c, t_options *opt);
+void	init_options(t_options *opt);
+char	*set_options(const char *format, t_options *opt);
+
+ssize_t	print_conversion_specification(const char **format, va_list *ap)
 {
-	opt->f_adjust_left = false;
-	opt->f_alt_form = false;
-	opt->f_show_sign = false;
-	opt->f_sign_space =false;
-	opt->f_zero_padding = false;
-	opt->min_field_width = 0;
-	opt->precision = 0;
-}
+	t_options	opt;
 
-void	set_options(const char **format, t_options *opt)
-{
-	// flags!
+	init_options(&opt);
+	*format = set_options(*format, &opt) + 1;
 
-	// min field width!
-
-	// if period? percision!
-}
-
-ssize_t	print_character(char c, t_options *opt)
-{
-	ssize_t	write_bytes;
-	ssize_t	padding_bytes;
-
-	if (opt->f_adjust_left == false)
-	{
-		if (opt->min_field_width - sizeof c > 0)
-		{
-			// write padding
-			while (opt->min_field_width - sizeof c != 0)
-			{
-				write_bytes = write(STDOUT_FILENO, " ", sizeof(char));
-				if (write_bytes == -1)
-					return (-1);
-				--(opt->min_field_width);
-			}
-		}
-		write_bytes = write(STDOUT_FILENO, &c, sizeof c);
-	}
-	return (write(STDOUT_FILENO, &c, sizeof c));
+	if (*(*format - 1) == 'c'){
+		return (print_character(va_arg(*ap, int), &opt));}
+	// if (**format == 's')
+	// 	return (print_string(va_arg(*ap, char *), &opt));
+	// if (**format == 'p')
+	// 	return (print_pointer_in_hex(va_arg(*ap, void *), &opt));
+	// if (**format == 'd')
+	// 	return (print_decimal(va_arg(*ap, int), &opt));
+	// if (**format == 'i')
+	// 	return (print_integer(va_arg(*ap, int), &opt));
+	// if (**format == 'u')
+	// 	return (print_unsigned_decimal(va_arg(*ap, unsigned int), &opt));
+	// if (**format == 'x')
+	// 	return (print_num_in_hex_lower(va_arg(*ap, int), &opt));
+	// if (**format == 'X')
+	// 	return (print_num_in_hex_upper(va_arg(*ap, int), &opt));
+	// if (**format == '%')
+	// 	return (print_percent(&opt));
+	++(*format);
+	return (-1);
 }

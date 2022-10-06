@@ -1,8 +1,7 @@
 #include <stdio.h>
+#include "ft_printf.h"
 
 int main()
 {
-	int a = 10;
-	int *p = &a;
-	printf("%.10-d", 12);
+	ft_printf("%10c", 'a');
 }
