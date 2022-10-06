@@ -5,10 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/25 22:37:11 by hacho             #+#    #+#             */
-/*   Updated: 2022/10/03 23:17:57 by hacho            ###   ########.fr       */
+/*   Created: 2022/10/06 13:20:12 by hacho             #+#    #+#             */
+/*   Updated: 2022/10/06 13:20:12 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
@@ -22,15 +24,17 @@ typedef struct s_args
 	int		count;
 }	t_args;
 
+// '%' [flags] [min field width number] [optioanl precision period followed by number] [type specifier]
+
 typedef struct s_options
 {
-	bool	f_alt_form;
-	bool	f_zero_padding;
-	bool	f_adjust_left;
-	bool	f_sign_space;
-	bool	f_show_sign;
-	int		min_field_width;
-	int		precision;
+	bool	f_alt_form;			// '#'
+	bool	f_zero_padding;		// '0'
+	bool	f_adjust_left;		// '-'
+	bool	f_sign_padding;		// ' '
+	bool	f_show_sign;		// '+'
+	int		min_field_width;	// number following flags
+	int		precision;			// '.' followed by number
 }	t_options;
 
 int	ft_printf(const char *format, ...);

@@ -1,9 +1,7 @@
-NAME	= libft.a
-
-CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror
-
-SRCS 	=		ft_atoi.c \
+NAME		=	libft.a
+CC			=	cc
+CFLAGS		=	-Wall -Wextra -Werror
+SRCS		=	ft_atoi.c \
 				ft_bzero.c \
 				ft_calloc.c \
 				ft_isalnum.c \
@@ -37,8 +35,7 @@ SRCS 	=		ft_atoi.c \
 				ft_substr.c \
 				ft_tolower.c \
 				ft_toupper.c
-
-SRCS_BONUS = 	ft_lstadd_back.c \
+SRCS_BONUS	=	ft_lstadd_back.c \
 				ft_lstadd_front.c \
 				ft_lstclear.c \
 				ft_lstdelone.c \
@@ -47,12 +44,12 @@ SRCS_BONUS = 	ft_lstadd_back.c \
 				ft_lstmap.c \
 				ft_lstnew.c \
 				ft_lstsize.c
+OBJS		=	$(SRCS:.c=.o)
+OBJS_BONUS	=	$(SRCS_BONUS:.c=.o)
+ARCHIVE		=	ar -crs
+REMOVE		=	rm -f
 
-OBJS		= $(SRCS:.c=.o)
-OBJS_BONUS 	= $(SRCS_BONUS:.c=.o)
-
-ARCHIVE		= ar -crs
-REMOVE		= rm -f
+.PHONY	:		bonus all clean fclean re
 
 all		:	$(NAME)
 
@@ -68,7 +65,5 @@ clean	:
 fclean	:	clean
 			$(REMOVE) $(NAME)
 
-re		:
-			make fclean
+re		:	fclean
 			make all
-.PHONY	: bonus all clean fclean re
