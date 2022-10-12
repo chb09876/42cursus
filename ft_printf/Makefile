@@ -1,11 +1,10 @@
+NAME	=	libftprintf.a
 CC		=	clang
 CFLAGS	=	-Wall -Wextra -Werror
-NAME	=	libftprintf.a
 SRCS	=	ft_printf.c \
 			ft_printf_conversion.c \
-			ft_printf_flags.c \
-			ft_printf_ordinary.c \
-			ft_atoi.c \
+			ft_printf_options.c \
+			ft_printf_print.c \
 			conversion/ft_printf_character.c \
 			conversion/ft_printf_decimal.c \
 			conversion/ft_printf_hex.c \
@@ -15,14 +14,15 @@ SRCS	=	ft_printf.c \
 			conversion/ft_printf_string.c \
 			conversion/ft_printf_unsigned_int.c
 OBJS	=	$(SRCS:.c=.o)
-ARCHIVE	=	ar -crs
+AR		=	ar
+ARFLAGS =	crs
 
 .PHONY	:	all clean fclean re	
 
 all		:	$(NAME)
 
 $(NAME)	:	$(OBJS)
-			$(ARCHIVE) $(NAME) $(OBJS)
+			$(AR) $(ARFLAGS) $(NAME) $(OBJS)
 
 clean	:
 			rm -f $(OBJS)

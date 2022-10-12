@@ -6,7 +6,7 @@
 /*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 22:01:38 by hacho             #+#    #+#             */
-/*   Updated: 2022/10/04 01:00:05 by hacho            ###   ########.fr       */
+/*   Updated: 2022/10/07 22:37:57 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,19 @@
 #include <stdarg.h>
 #include "ft_printf.h"
 
-ssize_t	print_character(char c, t_options *opt);
-void	init_options(t_options *opt);
-char	*set_options(const char *format, t_options *opt);
+ssize_t	print_character(unsigned char c, t_conversion_options *opt);
+ssize_t	print_string(char *s, t_conversion_options *opt);
+ssize_t	print_decimal(int d, t_conversion_options *opt);
 
-ssize_t	print_conversion_specification(const char **format, va_list *ap)
+ssize_t	print_conversion(va_list *ap, t_conversion_options *opt)
 {
-	t_options	opt;
-
-	init_options(&opt);
-	*format = set_options(*format, &opt) + 1;
-
-	if (*(*format - 1) == 'c'){
-		return (print_character(va_arg(*ap, int), &opt));}
-	// if (**format == 's')
-	// 	return (print_string(va_arg(*ap, char *), &opt));
+	if (opt->type == 'c')
+		return (print_character(va_arg(*ap, int), opt));
+	if (opt->type == 's')
+		return (print_string(va_arg(*ap, char *), opt));
 	// if (**format == 'p')
 	// 	return (print_pointer_in_hex(va_arg(*ap, void *), &opt));
-	// if (**format == 'd')
+	// if (opt->type == 'd')
 	// 	return (print_decimal(va_arg(*ap, int), &opt));
 	// if (**format == 'i')
 	// 	return (print_integer(va_arg(*ap, int), &opt));
@@ -43,6 +38,5 @@ ssize_t	print_conversion_specification(const char **format, va_list *ap)
 	// 	return (print_num_in_hex_upper(va_arg(*ap, int), &opt));
 	// if (**format == '%')
 	// 	return (print_percent(&opt));
-	++(*format);
 	return (-1);
 }

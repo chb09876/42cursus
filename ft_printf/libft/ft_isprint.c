@@ -1,28 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_ordinary.c                               :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/03 22:01:52 by hacho             #+#    #+#             */
-/*   Updated: 2022/10/03 23:55:47 by hacho            ###   ########.fr       */
+/*   Created: 2022/07/06 19:00:22 by hacho             #+#    #+#             */
+/*   Updated: 2022/08/15 18:52:55 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "libft.h"
 
-ssize_t	print_ordinary_characters(const char **format)
+int	ft_isprint(int c)
 {
-	const char	*end;
-	ssize_t		write_bytes;
-
-	end = *format;
-	while (*end && *end != '%')
-		++end;
-	write_bytes = write(STDOUT_FILENO, *format, end - *format);
-	if (write_bytes == -1)
-		return (-1);
-	*format = end;
-	return (write_bytes);
+	return (c >= 040 && c <= 0176);
 }

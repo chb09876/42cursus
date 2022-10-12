@@ -1,17 +1,12 @@
 #include <stdio.h>
 #include "ft_printf.h"
 
+
 int main()
 {
-	printf("%+-4.5d\n", 9);
-	printf("%+.d\n", 9);
-	// printf("%+.5d\n", 9);
-	// printf("%+.5d\n", 9);
-	// printf("%+.5d\n", 9);
-	// printf("%+.5d\n", 9);
-	// printf("%+.5d\n", 9);
-	// printf("%+.5d\n", 9);
-	// printf("%+.5d\n", 9);
+	// int a = ft_printf("[%s]\n[%s]\n", "", "world!");
+	int b = ft_printf("%s\n", "NULL");
+	printf("%d", b);
 }
 
 // 패딩을 제외한 출력될 길이를 미리 구한다.
