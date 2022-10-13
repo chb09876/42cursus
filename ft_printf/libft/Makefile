@@ -1,5 +1,7 @@
 NAME		=	libft.a
-CC			=	clang
+TARGET_M	=	libft
+TARGET_B	=	libft_bonus
+CC			=	cc
 CFLAGS		=	-Wall -Wextra -Werror
 SRCS		=	ft_atoi.c \
 				ft_bzero.c \
@@ -46,16 +48,20 @@ SRCS_BONUS	=	ft_lstadd_back.c \
 				ft_lstsize.c
 OBJS		=	$(SRCS:.c=.o)
 OBJS_BONUS	=	$(SRCS_BONUS:.c=.o)
+AR			=	ar
+ARFLAGS		=	crs
 
 .PHONY	:	bonus all clean fclean re
 
 all		:	$(NAME)
 
-$(NAME)	:	$(OBJS)
-			ar crs $(NAME) $(OBJS)
+bonus	:	$(NAME_BONUS)
 
-bonus	:	$(OBJS) $(OBJS_BONUS)
-			make all
+$(NAME)	:	$(OBJS)
+			$(AR) $(ARFLAGS) $(NAME) $(OBJS)
+
+$(NAME_BONUS)	:	$(OBJS) $(OBJS_BONUS)
+			$(AR) $(ARFLAGS) $(NAME) $(OBJS) $(OBJS_BONUS) && mv $(TARGET_B) $(NAME)
 
 clean	:
 			rm -f $(OBJS) $(OBJS_BONUS)
