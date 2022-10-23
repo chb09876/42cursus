@@ -1,8 +1,5 @@
 NAME		=	libft.a
-TARGET_M	=	libft
-TARGET_B	=	libft_bonus
-CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror
+HEADER		=	libft.h
 SRCS		=	ft_atoi.c \
 				ft_bzero.c \
 				ft_calloc.c \
@@ -46,28 +43,30 @@ SRCS_BONUS	=	ft_lstadd_back.c \
 				ft_lstmap.c \
 				ft_lstnew.c \
 				ft_lstsize.c
-OBJS		=	$(SRCS:.c=.o)
-OBJS_BONUS	=	$(SRCS_BONUS:.c=.o)
-AR			=	ar
-ARFLAGS		=	crs
 
-.PHONY	:	bonus all clean fclean re
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
+AR = ar
+ARFLAGS = crs
 
-all		:	$(NAME)
+.INTERMEDIATE : $(SRCS:.c=.o) $(SRCS_BONUS:.c=.o)
+.PHONY : bonus all clean fclean re
 
-bonus	:	$(NAME_BONUS)
+all : $(NAME)
 
-$(NAME)	:	$(OBJS)
-			$(AR) $(ARFLAGS) $(NAME) $(OBJS)
+$(NAME) : mandatory
 
-$(NAME_BONUS)	:	$(OBJS) $(OBJS_BONUS)
-			$(AR) $(ARFLAGS) $(NAME) $(OBJS) $(OBJS_BONUS) && mv $(TARGET_B) $(NAME)
+mandatory : $(NAME)($(SRCS:.c=.o))
 
-clean	:
-			rm -f $(OBJS) $(OBJS_BONUS)
+bonus : $(NAME)($(SRCS:.c=.o) $(SRCS_BONUS:.c=.o))
 
-fclean	:	clean
-			rm -f $(NAME)
+clean :
+	rm -f $(SRCS:.c=.o) $(SRCS_BONUS:.c=.o)
 
-re		:	fclean
-			make all
+fclean : clean
+	rm -f $(NAME)
+
+re : fclean
+	make all
+
+$(SRCS:.c=.o) $(SRCS_BONUS:.c=.o) : $(HEADER)

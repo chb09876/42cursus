@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_options.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hacho <hacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 21:56:22 by hacho             #+#    #+#             */
-/*   Updated: 2022/10/08 23:48:55 by hacho            ###   ########.fr       */
+/*   Updated: 2022/10/23 17:12:36 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "ft_printf.h"
 #include "libft.h"
 
-int	ft_numlen(int num);
+int			ft_numlen(int num);
 static void	init_options(t_conversion_options *opt);
 static char	*set_flags(char *format, t_flags *flags);
 static char	*set_min_field_width(char *format, t_conversion_options *opt);

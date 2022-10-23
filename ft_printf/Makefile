@@ -1,35 +1,45 @@
-NAME	=	libftprintf.a
-CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror
-SRCS	=	ft_printf.c \
-			ft_printf_conversion.c \
-			ft_printf_options.c \
-			ft_printf_print.c \
-			conversion/ft_printf_character.c \
-			conversion/ft_printf_decimal.c \
-			conversion/ft_printf_hex.c \
-			conversion/ft_printf_integer.c \
-			conversion/ft_printf_percent.c \
-			conversion/ft_printf_pointer.c \
-			conversion/ft_printf_string.c \
-			conversion/ft_printf_unsigned_int.c
-OBJS	=	$(SRCS:.c=.o)
-AR		=	ar
-ARFLAGS =	crs
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -I$(LIBFT_DIR)
+AR = ar
+ARFLAGS = crs
+VPATH = conversion:libft
 
-.PHONY	:	all clean fclean re	
+LIBFT		=	libft.a
+LIBFT_DIR	=	libft
+NAME		=	libftprintf.a
+SRCS		=	ft_printf.c \
+				ft_printf_conversion.c \
+				ft_printf_options.c \
+				ft_printf_print.c \
+				convert_character.c \
+				convert_decimal.c \
+				convert_hex.c \
+				convert_integer.c \
+				convert_percent.c \
+				convert_pointer.c \
+				convert_string.c \
+				convert_unsigned_int.c
 
-all		:	$(NAME)
+.PHONY : all bonus clean fclean re conversion $(LIBFT) $(LIBFT_DIR)
 
-$(NAME)	:	$(OBJS)
-			$(AR) $(ARFLAGS) $(NAME) $(OBJS)
+all : $(NAME)
 
-clean	:
-			rm -f $(OBJS)
+$(NAME) : mandatory
 
-fclean	:	clean
-			rm -f $(NAME)
+mandatory : $(NAME)($(SRCS:.c=.o))
 
-re		:	fclean
-			make all
+bonus : $(NAME)($(SRCS:.c=.o) $(SRCS_BONUS:.c=.o))
 
+$(NAME)($(SRCS:.c=.o)) $(NAME)($(SRCS:.c=.o) $(SRCS_BONUS:.c=.o)) : $(LIBFT)
+
+$(LIBFT) :
+	$(MAKE) -C $(LIBFT_DIR)
+
+clean :
+	rm -f $(SRCS:.c=.o) $(SRCS_BONUS:.c=.o)
+
+fclean : clean
+	rm -f $(NAME)
+
+re : fclean
+	$(MAKE) all

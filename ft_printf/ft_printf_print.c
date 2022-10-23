@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_print.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hacho <hacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 14:44:08 by hacho             #+#    #+#             */
-/*   Updated: 2022/10/07 18:28:33 by hacho            ###   ########.fr       */
+/*   Updated: 2022/10/23 17:10:09 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-
-ssize_t	print_ordinary_characters(const char **format);
-ssize_t	print_padding(char pad, int size);
+#include "ft_printf_print.h"
 
 ssize_t	print_ordinary_characters(const char **format)
 {
