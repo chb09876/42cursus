@@ -44,7 +44,7 @@ SRCS_BONUS	=	ft_lstadd_back.c \
 				ft_lstnew.c \
 				ft_lstsize.c
 
-CC = cc
+CC = clang
 CFLAGS = -Wall -Wextra -Werror
 AR = ar
 ARFLAGS = crs
