@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hacho <hacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 22:36:43 by hacho             #+#    #+#             */
-/*   Updated: 2022/11/05 01:00:43 by hacho            ###   ########.fr       */
+/*   Updated: 2022/11/06 21:40:48 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 #include "conversion.h"
 #include "ft_printf.h"
 
-static ssize_t	print_converted_string(va_list *ap, t_conversion_context *context);
+static ssize_t	print_converted_string(
+					va_list *ap, t_conversion_context *context);
 static ssize_t	print_ordinary_characters(const char *format);
 
 int	ft_printf(const char *format, ...)
@@ -33,14 +34,12 @@ int	ft_printf(const char *format, ...)
 	{
 		if (*format == '%')
 		{
-			format += set_conversion_context(format, &context);
+			format += set_conversion_context(format + 1, &context) + 1;
 			write_bytes = print_converted_string(&ap, &context);
 		}
 		else
 		{
 			write_bytes = print_ordinary_characters(format);
-			if (write_bytes == -1)
-				return (-1);
 			format += write_bytes;
 		}
 		if (write_bytes == -1)
@@ -61,25 +60,27 @@ static ssize_t	print_ordinary_characters(const char *format)
 	return (write(STDOUT_FILENO, (char *)format, end - format));
 }
 
-static ssize_t	print_converted_string(va_list *ap, t_conversion_context *context)
+static ssize_t	print_converted_string(
+	va_list *ap, t_conversion_context *context)
 {
 	if (context->type == 'c')
 		return (print_character(va_arg(*ap, int), context));
 	if (context->type == 's')
 		return (print_string(va_arg(*ap, char *), context));
-	// if (**format == 'p')
-	// 	return (print_pointer_in_hex(va_arg(*ap, void *), &opt));
-	// if (opt->type == 'd')
-	// 	return (print_decimal(va_arg(*ap, int), &opt));
-	// if (**format == 'i')
-	// 	return (print_integer(va_arg(*ap, int), &opt));
-	// if (**format == 'u')
-	// 	return (print_unsigned_decimal(va_arg(*ap, unsigned int), &opt));
-	// if (**format == 'x')
-	// 	return (print_num_in_hex_lower(va_arg(*ap, int), &opt));
-	// if (**format == 'X')
-	// 	return (print_num_in_hex_upper(va_arg(*ap, int), &opt));
-	// if (**format == '%')
-	// 	return (print_percent(&opt));
+	if (context->type == 'p')
+		return (print_pointer(va_arg(*ap, unsigned long long int), context));
+	if (context->type == 'd')
+		return (print_decimal(va_arg(*ap, int), context));
+	if (context->type == 'i')
+		return (print_integer(va_arg(*ap, int), context));
+	if (context->type == 'u')
+		return (print_unsigned_integer(
+				va_arg(*ap, unsigned long long int), context));
+	if (context->type == 'x')
+		return (print_hex_lower(va_arg(*ap, unsigned int), context));
+	if (context->type == 'X')
+		return (print_hex_upper(va_arg(*ap, unsigned int), context));
+	if (context->type == '%')
+		return (print_percent(context));
 	return (-1);
 }

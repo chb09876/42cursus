@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hacho <hacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 18:06:20 by hacho             #+#    #+#             */
-/*   Updated: 2022/11/05 00:12:54 by hacho            ###   ########.fr       */
+/*   Updated: 2022/11/06 22:19:16 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 ssize_t	ft_putchar_repeat(char c, int repeat, int fd)
 {
-	int count;
+	int	count;
 
 	count = 0;
 	while (repeat > count)
@@ -25,25 +25,19 @@ ssize_t	ft_putchar_repeat(char c, int repeat, int fd)
 			return (-1);
 		++count;
 	}
-	return (repeat);
+	return (count);
 }
 
-size_t	get_number_length(int n)
+size_t	get_unsigned_length(unsigned long long int n, int radix)
 {
-	int len;
-	long long int long_num;
+	int	len;
 
 	if (n == 0)
 		return (1);
 	len = 0;
-	long_num = n;
-	if (n < 0)
+	while (n)
 	{
-		long_num = -n;
-	}
-	while (long_num)
-	{
-		long_num /= 10;
+		n /= radix;
 		++len;
 	}
 	return (len);
@@ -64,7 +58,45 @@ void	print_number(long long int n, int fd)
 		ft_putchar_fd(unsigned_n + '0', fd);
 	else
 	{
-		ft_putnbr_fd(unsigned_n / 10, fd);
+		print_number(unsigned_n / 10, fd);
 		ft_putchar_fd(unsigned_n % 10 + '0', fd);
 	}
 }
+
+void	print_number_hex(unsigned int n, const char *table, int fd)
+{
+	if (n < 16)
+		ft_putchar_fd(table[n], fd);
+	else
+	{
+		print_number_hex(n / 16, table, fd);
+		ft_putchar_fd(table[n % 16], fd);
+	}
+}
+
+void	print_number_pointer(
+	unsigned long long int n, const char *table, int fd)
+{
+	if (n < 16)
+		ft_putchar_fd(table[n], fd);
+	else
+	{
+		print_number_pointer(n / 16, table, fd);
+		ft_putchar_fd(table[n % 16], fd);
+	}
+}
+
+// size_t	get_number_length_pointer(unsigned long long int n)
+// {
+// 	int	len;
+
+// 	if (n == 0)
+// 		return (1);
+// 	len = 0;
+// 	while (n)
+// 	{
+// 		n /= 16;
+// 		++len;
+// 	}
+// 	return (len);
+// }

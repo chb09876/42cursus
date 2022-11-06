@@ -1,4 +1,4 @@
-CC = clang
+CC = cc
 CFLAGS = -Wall -Wextra -Werror -I$(LIBFT_DIR) -Iconversion -I./
 AR = ar
 ARFLAGS = crs
@@ -12,7 +12,8 @@ SRCS		=	ft_printf.c \
 				utils.c \
 				character.c \
 				decimal.c \
-				hex.c \
+				hex_lower.c \
+				hex_upper.c \
 				integer.c \
 				percent.c \
 				pointer.c \
