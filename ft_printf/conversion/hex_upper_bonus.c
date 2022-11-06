@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hex_lower.c                                        :+:      :+:    :+:   */
+/*   hex_upper_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hacho <hacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 23:17:28 by hacho             #+#    #+#             */
-/*   Updated: 2022/11/06 22:34:13 by hacho            ###   ########.fr       */
+/*   Updated: 2022/11/06 22:31:25 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include "utils.h"
-#include "conversion.h"
+#include "utils_bonus.h"
+#include "conversion_bonus.h"
 
 static ssize_t	adjust_right_with_space_padding(
 					unsigned int num, int length,
@@ -24,7 +24,7 @@ static ssize_t	adjust_left_with_space_padding(
 					unsigned int num, int length,
 					t_conversion_context *context);
 
-ssize_t	print_hex_lower(unsigned int n, t_conversion_context *context)
+ssize_t	print_hex_upper(unsigned int n, t_conversion_context *context)
 {
 	int	length;
 
@@ -50,10 +50,10 @@ static ssize_t	adjust_right_with_space_padding(
 		(context->precision > length) * (context->precision - length),
 		STDOUT_FILENO);
 	if (context->alt_form == true && num != 0)
-		write(STDOUT_FILENO, HEX_PREFIX_LOWER, 2);
+		write(STDOUT_FILENO, HEX_PREFIX_UPPER, 2);
 	ft_putchar_repeat('0', context->precision - length, STDOUT_FILENO);
 	if (length != 0)
-		print_number_hex(num, HEX_TABLE_LOWER, STDOUT_FILENO);
+		print_number_hex(num, HEX_TABLE_UPPER, STDOUT_FILENO);
 	if (context->min_field_width - length - \
 		(context->alt_form == true && num != 0) * 2 - \
 		(context->precision > length) * (context->precision - length) > 0)
@@ -73,10 +73,10 @@ static ssize_t	adjust_right_with_zero_padding(
 		(context->precision > length) * (context->precision - length), \
 		STDOUT_FILENO);
 	if (context->alt_form == true && num != 0)
-		write(STDOUT_FILENO, HEX_PREFIX_LOWER, 2);
+		write(STDOUT_FILENO, HEX_PREFIX_UPPER, 2);
 	ft_putchar_repeat('0', context->precision - length, STDOUT_FILENO);
 	if (length != 0)
-		print_number_hex(num, HEX_TABLE_LOWER, STDOUT_FILENO);
+		print_number_hex(num, HEX_TABLE_UPPER, STDOUT_FILENO);
 	if (context->min_field_width - length - \
 		(context->alt_form == true && num != 0) * 2 - \
 		(context->precision > length) * (context->precision - length) > 0)
@@ -89,10 +89,10 @@ static ssize_t	adjust_left_with_space_padding(
 	unsigned int num, int length, t_conversion_context *context)
 {
 	if (context->alt_form == true && num != 0)
-		write(STDOUT_FILENO, HEX_PREFIX_LOWER, 2);
+		write(STDOUT_FILENO, HEX_PREFIX_UPPER, 2);
 	ft_putchar_repeat('0', context->precision - length, STDOUT_FILENO);
 	if (length != 0)
-		print_number_hex(num, HEX_TABLE_LOWER, STDOUT_FILENO);
+		print_number_hex(num, HEX_TABLE_UPPER, STDOUT_FILENO);
 	ft_putchar_repeat(' ', context->min_field_width - length - \
 		(context->alt_form == true && num != 0) * 2 - \
 		(context->precision > length) * (context->precision - length),

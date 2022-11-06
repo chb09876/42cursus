@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   character.c                                        :+:      :+:    :+:   */
+/*   character_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hacho <hacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 22:00:17 by hacho             #+#    #+#             */
-/*   Updated: 2022/11/06 22:43:48 by hacho            ###   ########.fr       */
+/*   Updated: 2022/11/06 22:30:23 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include "utils.h"
-#include "conversion.h"
+#include "utils_bonus.h"
+#include "conversion_bonus.h"
 
 ssize_t	print_character(unsigned char c, t_conversion_context *context)
 {

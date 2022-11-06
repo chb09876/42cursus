@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pointer.c                                          :+:      :+:    :+:   */
+/*   pointer_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hacho <hacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 23:17:25 by hacho             #+#    #+#             */
-/*   Updated: 2022/11/06 22:32:38 by hacho            ###   ########.fr       */
+/*   Updated: 2022/11/06 22:32:31 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include "utils.h"
-#include "conversion.h"
+#include "utils_bonus.h"
+#include "conversion_bonus.h"
 
 static ssize_t	adjust_right_with_space_padding(
 					unsigned long long int num, int length,

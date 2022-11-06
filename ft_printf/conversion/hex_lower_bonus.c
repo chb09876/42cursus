@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hex_lower.c                                        :+:      :+:    :+:   */
+/*   hex_lower_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hacho <hacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 23:17:28 by hacho             #+#    #+#             */
-/*   Updated: 2022/11/06 22:34:13 by hacho            ###   ########.fr       */
+/*   Updated: 2022/11/06 22:31:10 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include "utils.h"
-#include "conversion.h"
+#include "utils_bonus.h"
+#include "conversion_bonus.h"
 
 static ssize_t	adjust_right_with_space_padding(
 					unsigned int num, int length,

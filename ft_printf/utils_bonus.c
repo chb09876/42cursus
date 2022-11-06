@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hacho <hacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 18:06:20 by hacho             #+#    #+#             */
-/*   Updated: 2022/11/06 22:52:48 by hacho            ###   ########.fr       */
+/*   Updated: 2022/11/06 22:37:11 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "libft.h"
-#include "utils.h"
+#include "utils_bonus.h"
 
 ssize_t	ft_putchar_repeat(char c, int repeat, int fd)
 {
@@ -43,33 +43,23 @@ size_t	get_unsigned_length(unsigned long long int n, int radix)
 	return (len);
 }
 
-ssize_t	print_number(long long int n, int fd)
+void	print_number(long long int n, int fd)
 {
 	unsigned long long int	unsigned_n;
-	char					c;
-	ssize_t					len;
 
-	len = 0;
 	if (n < 0)
 	{
-		if (write(fd, "-", 1) == -1)
-			return (-1);
+		ft_putchar_fd('-', fd);
 		unsigned_n = -n;
 	}
 	else
 		unsigned_n = n;
 	if (unsigned_n < 10)
-	{
-		c = unsigned_n + '0';
-		if (write(fd, &c, 1) == -1)
-			return (-1);
-	}
+		ft_putchar_fd(unsigned_n + '0', fd);
 	else
 	{
 		print_number(unsigned_n / 10, fd);
-		c = unsigned_n % 10 + '0';
-		if (write(fd, &c, 1) == -1)
-			return (-1);
+		ft_putchar_fd(unsigned_n % 10 + '0', fd);
 	}
 }
 
@@ -95,18 +85,3 @@ void	print_number_pointer(
 		ft_putchar_fd(table[n % 16], fd);
 	}
 }
-
-// size_t	get_number_length_pointer(unsigned long long int n)
-// {
-// 	int	len;
-
-// 	if (n == 0)
-// 		return (1);
-// 	len = 0;
-// 	while (n)
-// 	{
-// 		n /= 16;
-// 		++len;
-// 	}
-// 	return (len);
-// }

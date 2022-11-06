@@ -19,6 +19,18 @@ SRCS		=	ft_printf.c \
 				pointer.c \
 				string.c \
 				unsigned_int.c
+SRCS_BONUS	=	ft_printf_bonus.c \
+				options_bonus.c \
+				utils_bonus.c \
+				character_bonus.c \
+				decimal_bonus.c \
+				hex_lower_bonus.c \
+				hex_upper_bonus.c \
+				integer_bonus.c \
+				percent_bonus.c \
+				pointer_bonus.c \
+				string_bonus.c \
+				unsigned_int_bonus.c
 
 .PHONY : all bonus clean fclean re conversion
 
@@ -31,7 +43,10 @@ mandatory : $(SRCS:.c=.o) $(LIBFT)
 	$(AR) $(ARFLAGS) $(NAME) $(SRCS:.c=.o)
 	touch mandatory
 
-bonus : $(NAME)($(SRCS:.c=.o) $(SRCS_BONUS:.c=.o))
+bonus : $(SRCS_BONUS:.c=.o) $(LIBFT)
+	cp $(LIBFT_DIR)/$(LIBFT) $(NAME)
+	$(AR) $(ARFLAGS) $(NAME) $(SRCS_BONUS:.c=.o)
+	touch bonus
 
 $(LIBFT) :
 	$(MAKE) -C $(LIBFT_DIR)

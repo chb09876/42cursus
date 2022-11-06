@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   conversion.h                                       :+:      :+:    :+:   */
+/*   conversion_bonus.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hacho <hacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 15:45:55 by hacho             #+#    #+#             */
-/*   Updated: 2022/11/06 22:30:03 by hacho            ###   ########.fr       */
+/*   Updated: 2022/11/06 22:29:58 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONVERSION_H
-# define CONVERSION_H
+#ifndef CONVERSION_BONUS_H
+# define CONVERSION_BONUS_H
 
 # include <sys/types.h>
-# include "options.h"
+# include "options_bonus.h"
 
 # define NULL_STR "(null)"
 # define HEX_TABLE_LOWER "0123456789abcdef"

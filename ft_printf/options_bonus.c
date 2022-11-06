@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   options.c                                          :+:      :+:    :+:   */
+/*   options_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hacho <hacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 21:56:22 by hacho             #+#    #+#             */
-/*   Updated: 2022/11/06 22:36:43 by hacho            ###   ########.fr       */
+/*   Updated: 2022/11/06 22:36:35 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "options.h"
+#include "options_bonus.h"
 #include "libft.h"
 
 static void	init_context(t_conversion_context *context);

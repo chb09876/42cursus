@@ -6,12 +6,11 @@
 /*   By: hacho <hacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 23:17:28 by hacho             #+#    #+#             */
-/*   Updated: 2022/11/06 22:17:35 by hacho            ###   ########.fr       */
+/*   Updated: 2022/11/06 22:34:22 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include "libft.h"
 #include "utils.h"
 #include "conversion.h"
 

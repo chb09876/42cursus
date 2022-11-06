@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_printf_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hacho <hacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 22:36:43 by hacho             #+#    #+#             */
-/*   Updated: 2022/11/06 22:36:14 by hacho            ###   ########.fr       */
+/*   Updated: 2022/11/06 22:36:05 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include <unistd.h>
-#include "options.h"
-#include "conversion.h"
-#include "ft_printf.h"
+#include "options_bonus.h"
+#include "conversion_bonus.h"
+#include "ft_printf_bonus.h"
 
 static ssize_t	print_converted_string(
 					va_list *ap, t_conversion_context *context);
