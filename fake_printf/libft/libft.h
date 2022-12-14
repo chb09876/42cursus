@@ -6,7 +6,7 @@
 /*   By: hacho <hacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:29:05 by hacho             #+#    #+#             */
-/*   Updated: 2022/11/15 22:03:45 by hacho            ###   ########.fr       */
+/*   Updated: 2022/10/23 15:44:42 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 int		ft_atoi(const char *str);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_strdup(const char *s1);
+
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char const *s1, char const *set);
@@ -64,10 +65,5 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-
-char	*ft_lltoa(long long int n);
-void	ft_putllnbr_fd(long long int n, int fd);
-void	ft_puthex_lower_fd(unsigned int n, int fd);
-void	ft_puthex_upper_fd(unsigned int n, int fd);
 
 #endif

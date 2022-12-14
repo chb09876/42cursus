@@ -1,15 +1,7 @@
-CC = cc
-CFLAGS = -Wall -Wextra -Werror -I$(LIBFT_DIR) -Iconversion -I./
-AR = ar
-ARFLAGS = crs
-VPATH = conversion:libft
-
 LIBFT		=	libft.a
 LIBFT_DIR	=	libft
 NAME		=	libftprintf.a
 SRCS		=	ft_printf.c \
-				options.c \
-				utils.c \
 				character.c \
 				decimal.c \
 				hex_lower.c \
@@ -19,43 +11,37 @@ SRCS		=	ft_printf.c \
 				pointer.c \
 				string.c \
 				unsigned_int.c
-SRCS_BONUS	=	ft_printf_bonus.c \
-				options_bonus.c \
-				utils_bonus.c \
-				character_bonus.c \
-				decimal_bonus.c \
-				hex_lower_bonus.c \
-				hex_upper_bonus.c \
-				integer_bonus.c \
-				percent_bonus.c \
-				pointer_bonus.c \
-				string_bonus.c \
-				unsigned_int_bonus.c
+VPATH = mandatory:mandatory/conversion
 
-.PHONY : all bonus clean fclean re conversion
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -I$(LIBFT_DIR) -Imandatory/headers
+AR = ar
+ARFLAGS = crs
+
+.INTERMEDIATE : $(SRCS:.c=.o) $(LIBFT) mandatory_target
+.DEFAULT : all
+.PHONY : all bonus clean fclean re
 
 all : $(NAME)
 
-$(NAME) : mandatory
+$(NAME) : mandatory_target
 
-mandatory : $(SRCS:.c=.o) $(LIBFT)
-	cp $(LIBFT_DIR)/$(LIBFT) $(NAME)
-	$(AR) $(ARFLAGS) $(NAME) $(SRCS:.c=.o)
-	touch mandatory
-
-bonus : $(SRCS_BONUS:.c=.o) $(LIBFT)
-	cp $(LIBFT_DIR)/$(LIBFT) $(NAME)
-	$(AR) $(ARFLAGS) $(NAME) $(SRCS_BONUS:.c=.o)
-	touch bonus
+mandatory_target : $(SRCS:.c=.o) $(LIBFT)
+	$(AR) $(ARFLAGS) $(LIBFT) $(SRCS:.c=.o)
+	mv $(LIBFT) $(NAME)
 
 $(LIBFT) :
-	$(MAKE) -C $(LIBFT_DIR)
+	$(MAKE) -C$(LIBFT_DIR)
+	mv $(LIBFT_DIR)/$(LIBFT) ./
 
 clean :
-	rm -f $(SRCS:.c=.o) $(SRCS_BONUS:.c=.o)
+	rm -f $(SRCS:.c=.o) $(LIBFT)
 
 fclean : clean
 	rm -f $(NAME)
 
 re : fclean
 	$(MAKE) all
+
+ft_printf.o : headers/ft_printf.h
+character.o decimal.o  hex_lower.o  hex_upper.o  integer.o  percent.o  pointer.o  string.o  unsigned_int.o : headers/conversion.h
