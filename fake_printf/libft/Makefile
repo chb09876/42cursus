@@ -43,30 +43,25 @@ SRCS_BONUS	=	ft_lstadd_back.c \
 				ft_lstmap.c \
 				ft_lstnew.c \
 				ft_lstsize.c
-SRCS_ADDITION =	ft_putllnbr_fd.c \
-				ft_lltoa.c \
-				ft_puthex_lower_fd.c \
-				ft_puthex_upper_fd.c
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 AR = ar
 ARFLAGS = crs
 
-.INTERMEDIATE : $(SRCS:.c=.o) $(SRCS_BONUS:.c=.o) $(SRCS_ADDITION:.c=.o)
+.INTERMEDIATE : $(SRCS:.c=.o) $(SRCS_BONUS:.c=.o)
 .PHONY : bonus all clean fclean re
-.NOTPARALLEL : notparallel
 
 all : $(NAME)
 
 $(NAME) : mandatory
 
-mandatory : $(NAME)($(SRCS:.c=.o) $(SRCS_ADDITION:.c=.o))
+mandatory : $(NAME)($(SRCS:.c=.o))
 
-bonus : $(NAME)($(SRCS:.c=.o) $(SRCS_BONUS:.c=.o) $(SRCS_ADDITION:.c=.o))
+bonus : $(NAME)($(SRCS:.c=.o) $(SRCS_BONUS:.c=.o))
 
 clean :
-	rm -f $(SRCS:.c=.o) $(SRCS_BONUS:.c=.o) $(SRCS_ADDITION:.c=.o)
+	rm -f $(SRCS:.c=.o) $(SRCS_BONUS:.c=.o)
 
 fclean : clean
 	rm -f $(NAME)
@@ -74,4 +69,4 @@ fclean : clean
 re : fclean
 	make all
 
-$(SRCS:.c=.o) $(SRCS_BONUS:.c=.o) $(SRCS_ADDITION:.c=.o): $(HEADER)
+$(SRCS:.c=.o) $(SRCS_BONUS:.c=.o) : $(HEADER)
