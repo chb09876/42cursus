@@ -1,6 +1,19 @@
-#ifndef UTILS_H
-#define UTILS_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hacho <hacho@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/27 04:01:13 by hacho             #+#    #+#             */
+/*   Updated: 2022/12/27 04:01:15 by hacho            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int ft_pow(int num, int level);
+#ifndef UTILS_H
+# define UTILS_H
+
+int		ft_pow(int num, int level);
+void	ft_putstr_fd(char *s, int fd);
 
 #endif

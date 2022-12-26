@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_atoi.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hacho <hacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/27 04:10:19 by hacho             #+#    #+#             */
-/*   Updated: 2022/12/27 04:11:44 by hacho            ###   ########.fr       */
+/*   Created: 2022/12/27 03:20:42 by hacho             #+#    #+#             */
+/*   Updated: 2022/12/27 04:04:16 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#ifndef FT_ATOI_H
+# define FT_ATOI_H
 
-typedef struct s_arrays {
-	int	*arr;
-	int	*sorted;
-	int	*ranked;
-}	t_arrays;
+int	ft_atoi(const char *str);
 
 #endif

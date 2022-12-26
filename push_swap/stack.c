@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stack.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hacho <hacho@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/27 04:04:27 by hacho             #+#    #+#             */
+/*   Updated: 2022/12/27 04:05:12 by hacho            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "stack.h"
 #include "node.h"
 #include <stdlib.h>
-#include <stdio.h>
 
-void push(t_stack *stack, t_node *node)
+void	push(t_stack *stack, t_node *node)
 {
 	if (stack->size == 0)
 		stack->bottom = node;
@@ -13,10 +24,10 @@ void push(t_stack *stack, t_node *node)
 	++stack->size;
 }
 
-t_node *pop(t_stack *stack)
+t_node	*pop(t_stack *stack)
 {
-	t_node *top_node;
-	t_node *tmp;
+	t_node	*top_node;
+	t_node	*tmp;
 
 	if (stack->size == 0)
 		return (NULL);
@@ -37,11 +48,11 @@ t_node *pop(t_stack *stack)
 	return (top_node);
 }
 
-t_stack *make_empty_stack()
+t_stack	*make_empty_stack(void)
 {
-	t_stack *new_stack;
+	t_stack	*new_stack;
 
-	new_stack = malloc(sizeof *new_stack);
+	new_stack = malloc(sizeof * new_stack);
 	if (new_stack == NULL)
 		return (NULL);
 	new_stack->bottom = NULL;
@@ -50,11 +61,11 @@ t_stack *make_empty_stack()
 	return (new_stack);
 }
 
-t_stack *make_stack_with_list(int *arr, int size)
+t_stack	*make_stack_with_list(int *arr, int size)
 {
-	t_stack *new_stack;
-	t_node *node;
-	int i;
+	t_stack	*new_stack;
+	t_node	*node;
+	int		i;
 
 	new_stack = make_empty_stack();
 	if (new_stack == NULL)
@@ -67,23 +78,11 @@ t_stack *make_stack_with_list(int *arr, int size)
 		{
 			while (new_stack->size > 0)
 				free(pop(new_stack));
+			free(new_stack);
 			return (NULL);
 		}
 		push(new_stack, node);
 		++i;
 	}
 	return (new_stack);
-}
-
-int print_stack(t_stack *stack)
-{
-	t_node *node = stack->bottom;
-
-	printf("bot -> ");
-	while (node)
-	{
-		printf("%d ", node->data);
-		node = node->next;
-	}
-	printf("-> top\n");
 }

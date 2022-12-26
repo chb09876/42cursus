@@ -1,17 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   radix_sort.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hacho <hacho@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/27 03:50:52 by hacho             #+#    #+#             */
+/*   Updated: 2022/12/27 04:09:04 by hacho            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef RADIX_SORT_H
-#define RADIX_SORT_H
+# define RADIX_SORT_H
 
-#include "stack.h"
+# include "stack.h"
 
-typedef struct s_pivot
-{
-	int big;
-	int small;
-} t_pivot;
-
-int radix_sort_binary_three_chunk(t_stack *a, t_stack *b, int *sorted, int size);
-int radix_sort_binary_two_chunk(t_stack *a, t_stack *b, int *sorted, int size);
-int radix_sort_binary(t_stack *a, t_stack *b, int *sorted, int size);
-int radix_sort_ternary(t_stack *a, t_stack *b, int *sorted, int size);
+void	radix_sort_binary(t_stack *a, t_stack *b);
 
 #endif
