@@ -1,85 +1,81 @@
 #include "heap_sort.h"
-#include "stack.h"
-#include <stdio.h>
+#include <stdlib.h>
 
-void swap(int *a, int *b)
+static void swap(int *a, int *b);
+static void insert(t_heap *heap, int elem);
+static int pop(t_heap *heap);
+static t_heap *make_heap(int reserved);
+
+int *heap_sort(int *arr, int size)
 {
-	int tmp = *a;
+	t_heap *heap = make_heap(size);
+	int *sorted = malloc(sizeof *sorted * size);
+	int i;
+
+	i = 0;
+	while (i < size)
+		insert(heap, arr[i++]);
+	i = 0;
+	while (i < size)
+		sorted[i++] = pop(heap);
+	free(heap->arr);
+	free(heap);
+	return (sorted);
+}
+
+static t_heap *make_heap(int reserved)
+{
+	t_heap *new_heap;
+
+	new_heap = malloc(sizeof *new_heap);
+	if (new_heap == NULL)
+		return (NULL);
+	new_heap->arr = malloc(sizeof *new_heap->arr * reserved);
+	if (new_heap->arr == NULL)
+		return (NULL);
+	new_heap->size = 0;
+	return (new_heap);
+}
+
+static void swap(int *a, int *b)
+{
+	int tmp;
+
+	tmp = *a;
 	*a = *b;
 	*b = tmp;
 }
 
-void heap_insert(t_stack *stack, int elem)
+static void insert(t_heap *heap, int elem)
 {
-	int curr_idx = stack->size;
+	int curr_idx = heap->size;
 
-	stack->arr[curr_idx] = elem;
-	while (curr_idx != 0 && stack->arr[(curr_idx - 1) / 2] < elem)
+	heap->arr[curr_idx] = elem;
+	while (curr_idx != 0 && heap->arr[(curr_idx - 1) / 2] > elem)
 	{
-		swap(stack->arr + curr_idx, stack->arr + (curr_idx - 1) / 2);
-		for (int i = 0; i < stack->size - curr_idx; ++i)
-			printf("pa\n");
-		for (int i = 0; i < (curr_idx - 1) / 2; ++i)
-		{
-			printf("rrb\n");
-			printf("pa\n");
-		}
-		if ((curr_idx - 1) / 2 == curr_idx - 1)
-			printf("sb\n");
-		else
-			printf("rrb\nsb\nrb\n");
-		for (int i = 0; i < (curr_idx - 1) / 2; ++i)
-		{
-			printf("pb\n");
-			printf("rb\n");
-		}
-		for (int i = 0; i < stack->size - curr_idx; ++i)
-			printf("pb\n");
-		// }
+		swap(heap->arr + curr_idx, heap->arr + (curr_idx - 1) / 2);
 		curr_idx = (curr_idx - 1) / 2;
 	}
-	++(stack->size);
+	++(heap->size);
 }
 
-int heap_pop(t_stack *stack)
+static int pop(t_heap *heap)
 {
-	int peeked = stack->arr[0];
+	int peeked = heap->arr[0];
 	int curr_idx = 0;
 	int next_idx = 0;
 
-	stack->arr[curr_idx] = stack->arr[--(stack->size)];
-	printf("rb\n");
-	while ((curr_idx + 1) * 2 - 1 < stack->size)
+	heap->arr[curr_idx] = heap->arr[--(heap->size)];
+	while ((curr_idx + 1) * 2 - 1 < heap->size)
 	{
-		if (stack->arr[(curr_idx + 1) * 2 - 1] > stack->arr[next_idx])
+		if (heap->arr[(curr_idx + 1) * 2 - 1] < heap->arr[next_idx])
 			next_idx = (curr_idx + 1) * 2 - 1;
-		if ((curr_idx + 1) * 2 < stack->size && stack->arr[(curr_idx + 1) * 2] > stack->arr[next_idx])
+		if ((curr_idx + 1) * 2 < heap->size && heap->arr[(curr_idx + 1) * 2] < heap->arr[next_idx])
 			next_idx = (curr_idx + 1) * 2;
 		if (next_idx == curr_idx)
 			break;
-		swap(stack->arr + next_idx, stack->arr + curr_idx);
-		// *count += (stack->size - 1 - (curr_idx - 1) / 2) * 2 + (curr_idx)*4 + 3;
-		for (int i = 0; i < stack->size - 1 - next_idx; ++i)
-			printf("pa\n");
-		for (int i = 0; i < curr_idx; ++i)
-		{
-			printf("rrb\n");
-			printf("pa\n");
-		}
-		if (curr_idx == next_idx - 1)
-			printf("sb\n");
-		else
-			printf("rrb\nsb\nrb\n");
-		for (int i = 0; i < curr_idx; ++i)
-		{
-			printf("pb\n");
-			printf("rb\n");
-		}
-		for (int i = 0; i < stack->size - 1 - next_idx; ++i)
-			printf("pb\n");
+		swap(heap->arr + next_idx, heap->arr + curr_idx);
 		curr_idx = next_idx;
 	}
 	return (peeked);
 }
-
-#define SIZE 8
