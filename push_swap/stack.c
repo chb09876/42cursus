@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hacho <hacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 04:04:27 by hacho             #+#    #+#             */
-/*   Updated: 2022/12/27 04:05:12 by hacho            ###   ########.fr       */
+/*   Updated: 2022/12/27 19:43:02 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "node.h"
 #include <stdlib.h>
 
-void	push(t_stack *stack, t_node *node)
+void push(t_stack *stack, t_node *node)
 {
 	if (stack->size == 0)
 		stack->bottom = node;
@@ -24,10 +24,10 @@ void	push(t_stack *stack, t_node *node)
 	++stack->size;
 }
 
-t_node	*pop(t_stack *stack)
+t_node *pop(t_stack *stack)
 {
-	t_node	*top_node;
-	t_node	*tmp;
+	t_node *top_node;
+	t_node *tmp;
 
 	if (stack->size == 0)
 		return (NULL);
@@ -48,11 +48,11 @@ t_node	*pop(t_stack *stack)
 	return (top_node);
 }
 
-t_stack	*make_empty_stack(void)
+t_stack *make_empty_stack(void)
 {
-	t_stack	*new_stack;
+	t_stack *new_stack;
 
-	new_stack = malloc(sizeof * new_stack);
+	new_stack = malloc(sizeof *new_stack);
 	if (new_stack == NULL)
 		return (NULL);
 	new_stack->bottom = NULL;
@@ -61,11 +61,11 @@ t_stack	*make_empty_stack(void)
 	return (new_stack);
 }
 
-t_stack	*make_stack_with_list(int *arr, int size)
+t_stack *make_stack_with_list(int *arr, int size)
 {
-	t_stack	*new_stack;
-	t_node	*node;
-	int		i;
+	t_stack *new_stack;
+	t_node *node;
+	int i;
 
 	new_stack = make_empty_stack();
 	if (new_stack == NULL)
@@ -85,4 +85,11 @@ t_stack	*make_stack_with_list(int *arr, int size)
 		++i;
 	}
 	return (new_stack);
+}
+
+void free_stack(t_stack *stack)
+{
+	while (stack->size > 0)
+		free(pop(stack));
+	free(stack);
 }

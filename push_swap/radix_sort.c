@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   radix_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hacho <hacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 04:03:48 by hacho             #+#    #+#             */
-/*   Updated: 2022/12/27 04:08:55 by hacho            ###   ########.fr       */
+/*   Updated: 2022/12/27 20:56:17 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@
 
 #define DEBUG 0
 
-static int	check_rotate(t_stack *stack, int level, int radix);
-static int	get_digit(int num, int level, int radix);
+static int check_rotate(t_stack *stack, int level, int radix);
+static int get_digit(int num, int level, int radix);
 
-void	radix_sort_binary(t_stack *a, t_stack *b)
+void radix_sort_binary(t_stack *a, t_stack *b)
 {
-	int	level;
-	int	tmp;
+	int level;
+	int tmp;
 
 	level = 0;
-	while (level < sizeof(int) * 8)
+	while (!is_sorted(a) && level < (int)sizeof(int) * 8)
 	{
 		if (check_rotate(a, level, 2))
 		{
@@ -47,10 +47,10 @@ void	radix_sort_binary(t_stack *a, t_stack *b)
 	}
 }
 
-static int	check_rotate(t_stack *stack, int level, int radix)
+static int check_rotate(t_stack *stack, int level, int radix)
 {
-	t_node	*node;
-	int		flag;
+	t_node *node;
+	int flag;
 
 	node = stack->bottom;
 	if (stack->size == 0)
@@ -67,7 +67,7 @@ static int	check_rotate(t_stack *stack, int level, int radix)
 	return (0);
 }
 
-static int	get_digit(int num, int level, int radix)
+static int get_digit(int num, int level, int radix)
 {
 	return (num / ft_pow(radix, level) % radix);
 }

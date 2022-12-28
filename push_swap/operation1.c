@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operation1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hacho <hacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 04:03:43 by hacho             #+#    #+#             */
-/*   Updated: 2022/12/27 04:23:44 by hacho            ###   ########.fr       */
+/*   Updated: 2022/12/27 15:50:24 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 #include "utils.h"
 #include <unistd.h>
 
-void	op_swap(t_stack *stack, const char *op)
+void op_swap(t_stack *stack, char *op)
 {
-	t_node	*tmp1;
-	t_node	*tmp2;
+	t_node *tmp1;
+	t_node *tmp2;
 
 	if (stack->size < 2)
-		return ;
+		return;
 	tmp1 = pop(stack);
 	tmp2 = pop(stack);
 	push(stack, tmp1);
@@ -29,7 +29,7 @@ void	op_swap(t_stack *stack, const char *op)
 		ft_putstr_fd(op, STDOUT_FILENO);
 }
 
-void	op_swap_same(t_stack *a, t_stack *b, const char *op)
+void op_swap_same(t_stack *a, t_stack *b, char *op)
 {
 	op_swap(a, NULL);
 	op_swap(b, NULL);
@@ -37,7 +37,7 @@ void	op_swap_same(t_stack *a, t_stack *b, const char *op)
 		ft_putstr_fd(op, STDOUT_FILENO);
 }
 
-void	op_push(t_stack *from, t_stack *to, const char *op)
+void op_push(t_stack *from, t_stack *to, char *op)
 {
 	if (from->size > 0)
 		push(to, pop(from));
