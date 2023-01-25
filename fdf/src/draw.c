@@ -8,8 +8,8 @@
 int bresenham(t_vector2 a, t_vector2 b, t_fdf_context *fdf)
 {
 	// assume that 1 > slope > 0
-	t_vector2	delta;
-	int			discriminant;
+	t_vector2 delta;
+	int discriminant;
 
 	delta.x = b.x - a.x;
 	delta.y = b.y - a.y;
@@ -37,7 +37,7 @@ int bresenham(t_vector2 a, t_vector2 b, t_fdf_context *fdf)
 	}
 	else if (delta.y < 0 && delta.x >= -delta.y)
 	{
-		discriminant = 2 * -delta.y + delta.x;
+		discriminant = 2 * -delta.y - delta.x;
 		while (a.x < b.x)
 		{
 			if (discriminant < 0)
@@ -48,7 +48,7 @@ int bresenham(t_vector2 a, t_vector2 b, t_fdf_context *fdf)
 			else
 			{
 				mlx_put_pixel(fdf->paper, ++a.x, --a.y, 0xff0000ff);
-				discriminant += 2 * (-delta.y + delta.x);
+				discriminant += 2 * (-delta.y - delta.x);
 			}
 		}
 	}

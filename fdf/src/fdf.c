@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hacho <hacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 17:38:40 by hacho             #+#    #+#             */
-/*   Updated: 2023/01/24 22:58:04 by hacho            ###   ########.fr       */
+/*   Updated: 2023/01/25 02:03:55 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@
 
 static t_fdf_context init_fdf();
 static int ft_error(char *str, int exitnum);
-static void exit_hook(mlx_key_data_t keydata, void* param);
+static void exit_hook(mlx_key_data_t keydata, void *param);
 
 int main()
 {
-	t_fdf_context	fdf;
+	t_fdf_context fdf;
 
 	fdf = init_fdf();
 	if (fdf.mlx == NULL || fdf.paper == NULL)
@@ -38,9 +38,9 @@ int main()
 	t_vector2 b = {100, 50};
 	bresenham(a, b, &fdf);
 	// bresenham(a, b, &fdf);
-	// t_vector2 c = {0, 100};
-	// t_vector2 d = {100, 50};
-	// bresenham(c, d, &fdf);
+	t_vector2 c = {0, 100};
+	t_vector2 d = {100, 150};
+	bresenham(c, d, &fdf);
 	mlx_key_hook(fdf.mlx, exit_hook, &fdf);
 	mlx_loop(fdf.mlx);
 	mlx_terminate(fdf.mlx);
@@ -67,7 +67,7 @@ static int ft_error(char *str, int exitnum)
 	return (exitnum);
 }
 
-static void exit_hook(mlx_key_data_t keydata, void* param)
+static void exit_hook(mlx_key_data_t keydata, void *param)
 {
 	t_fdf_context *fdf;
 
