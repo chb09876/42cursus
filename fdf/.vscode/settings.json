@@ -2,6 +2,13 @@
 	"files.associations": {
 		"mlx42.h": "c",
 		"fdf.h": "c",
-		"util.h": "c"
+		"util.h": "c",
+		"vector.h": "c",
+		"draw.h": "c",
+		"bresenham.h": "c",
+		"matrix.h": "c",
+		"libft.h": "c",
+		"algorithm": "c",
+		"fcntl.h": "c"
 	}
 }

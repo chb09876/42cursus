@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   map.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hacho <hacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/25 17:03:45 by hacho             #+#    #+#             */
-/*   Updated: 2023/01/30 16:10:05 by hacho            ###   ########.fr       */
+/*   Created: 2023/01/26 16:45:04 by hacho             #+#    #+#             */
+/*   Updated: 2023/01/30 21:39:23 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "draw.h"
-#include "bresenham.h"
-#include "vector.h"
-#include "fdf.h"
-#include "MLX42/MLX42.h"
-#include "util.h"
+#ifndef MAP_H
+#define MAP_H
 
-int drawline(t_vector2 a, t_vector2 b, t_fdf_context *fdf)
-{
-	if (a.x < b.x)
-		return (bresenham(a, b, fdf));
-	return (bresenham(b, a, fdf));
-}
+# include "vector.h"
+# include "MLX42/MLX42.h"
+
+typedef struct s_vertex {
+	t_vector3		pos;
+	unsigned int	color;
+}	t_vertex;
+
+typedef struct s_world {
+	t_vertex	**map;
+	int			width;
+	int			height;
+}	t_world;
+
+t_world	*parse_map(char *filename);
+void print_map(t_world *world);
+
+#endif
