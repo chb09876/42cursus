@@ -9,6 +9,8 @@
 		"matrix.h": "c",
 		"libft.h": "c",
 		"algorithm": "c",
-		"fcntl.h": "c"
+		"fcntl.h": "c",
+		"map.h": "c",
+		"color.h": "c"
 	}
 }

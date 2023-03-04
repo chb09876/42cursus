@@ -1,35 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/22 18:10:54 by hacho             #+#    #+#             */
-/*   Updated: 2023/03/04 19:31:07 by hacho            ###   ########.fr       */
+/*   Created: 2022/08/11 18:07:10 by hacho             #+#    #+#             */
+/*   Updated: 2022/08/15 18:55:17 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#include <unistd.h>
+#include "libft.h"
 
-# include "MLX42/MLX42.h"
-# include "map.h"
-# define WINDOW_WIDTH 1800
-# define WINDOW_HEIGHT 1000
-# define DEFAULT_COLOR 0xffffffff
-# define DEFAULT_SCALE 10
-# define OFFSET_X 500
-# define OFFSET_Y 300
-# define Z_CORRECTION 0.3
-
-typedef struct s_fdf_context
+void	ft_putstr_fd(char *s, int fd)
 {
-	mlx_t		*mlx;
-	mlx_image_t	*paper;
-	t_world		*world;
-	t_vector2	screen_offset;
-	int			scale;
-}	t_fdf_context;
-
-#endif
+	write(fd, s, ft_strlen(s) * sizeof(char));
+}

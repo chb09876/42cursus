@@ -1,35 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   color.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/22 18:10:54 by hacho             #+#    #+#             */
-/*   Updated: 2023/03/04 19:31:07 by hacho            ###   ########.fr       */
+/*   Created: 2023/02/19 22:06:46 by hacho             #+#    #+#             */
+/*   Updated: 2023/03/04 18:38:19 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#ifndef COLOR_H
+# define COLOR_H
 
-# include "MLX42/MLX42.h"
-# include "map.h"
-# define WINDOW_WIDTH 1800
-# define WINDOW_HEIGHT 1000
-# define DEFAULT_COLOR 0xffffffff
-# define DEFAULT_SCALE 10
-# define OFFSET_X 500
-# define OFFSET_Y 300
-# define Z_CORRECTION 0.3
-
-typedef struct s_fdf_context
-{
-	mlx_t		*mlx;
-	mlx_image_t	*paper;
-	t_world		*world;
-	t_vector2	screen_offset;
-	int			scale;
-}	t_fdf_context;
+unsigned int	get_r(unsigned int color);
+unsigned int	get_g(unsigned int color);
+unsigned int	get_b(unsigned int color);
+unsigned int	get_rgba(unsigned int r, unsigned int g,
+					unsigned int b, unsigned int a);
+unsigned int	gradient(unsigned int start, unsigned int dest,
+					int period, int level);
 
 #endif

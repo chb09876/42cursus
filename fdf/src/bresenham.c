@@ -3,91 +3,144 @@
 /*                                                        :::      ::::::::   */
 /*   bresenham.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hacho <hacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 16:56:32 by hacho             #+#    #+#             */
-/*   Updated: 2023/01/30 16:10:02 by hacho            ###   ########.fr       */
+/*   Updated: 2023/03/04 18:40:36 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bresenham.h"
+#include "color.h"
+#include "util.h"
 
-int bresenham(t_vector2 a, t_vector2 b, t_fdf_context *fdf)
+static void	bresenham2(t_vertex a, t_vertex b, t_fdf_context *fdf, int disc);
+static void	bresenham3(t_vertex a, t_vertex b, t_fdf_context *fdf, int disc);
+static void	bresenham4(t_vertex a, t_vertex b, t_fdf_context *fdf, int disc);
+static void	bresenham5(t_vertex a, t_vertex b, t_fdf_context *fdf, int disc);
+
+void	bresenham(t_vertex a, t_vertex b, t_fdf_context *fdf)
 {
-	// assume that 1 > slope > 0
-	t_vector2 delta;
-	int discriminant;
+	t_vector2	delta;
+	int			color_level;
 
-	delta.x = b.x - a.x;
-	delta.y = b.y - a.y;
-	mlx_put_pixel(fdf->paper, a.x, a.y, 0xFF9FE5ff);
+	delta.x = b.pos.x - a.pos.x;
+	delta.y = b.pos.y - a.pos.y;
+	color_level = 0;
 	if (delta.y >= 0 && delta.x >= delta.y)
-	{
-		discriminant = 2 * delta.y - delta.x;
-		while (a.x < b.x)
-		{
-			if (discriminant < 0)
-			{
-				mlx_put_pixel(fdf->paper, ++a.x, a.y, 0xFF9FE5ff);
-				discriminant += 2 * delta.y;
-			}
-			else
-			{
-				mlx_put_pixel(fdf->paper, ++a.x, ++a.y, 0xFF9FE5ff);
-				discriminant += 2 * (delta.y - delta.x);
-			}
-		}
-	}
+		bresenham2(a, b, fdf, 2 * delta.y - delta.x);
 	else if (delta.y >= 0 && delta.x < delta.y)
-	{ // slope > 1
-		discriminant = 2 * delta.x - delta.y;
-		while (a.y < b.y)
-		{
-			if (discriminant < 0)
-			{
-				mlx_put_pixel(fdf->paper, a.x, ++a.y, 0xFF9FE5ff);
-				discriminant += 2 * delta.x;
-			}
-			else
-			{
-				mlx_put_pixel(fdf->paper, ++a.x, ++a.y, 0xFF9FE5ff);
-				discriminant += 2 * (delta.x - delta.y);
-			}
-		}
-	}
+		bresenham3(a, b, fdf, 2 * delta.x - delta.y);
 	else if (delta.y < 0 && delta.x >= -delta.y)
-	{
-		discriminant = 2 * -delta.y - delta.x;
-		while (a.x < b.x)
-		{
-			if (discriminant < 0)
-			{
-				mlx_put_pixel(fdf->paper, ++a.x, a.y, 0xFF9FE5ff);
-				discriminant += 2 * -delta.y;
-			}
-			else
-			{
-				mlx_put_pixel(fdf->paper, ++a.x, --a.y, 0xFF9FE5ff);
-				discriminant += 2 * (-delta.y - delta.x);
-			}
-		}
-	}
+		bresenham4(a, b, fdf, 2 * -delta.y - delta.x);
 	else if (delta.y < 0 && delta.x < -delta.y)
+		bresenham5(a, b, fdf, 2 * delta.x + delta.y);
+}
+
+static void	bresenham2(t_vertex a, t_vertex b, t_fdf_context *fdf, int disc)
+{
+	t_vector2		delta;
+	int				color_level;
+	unsigned int	color;
+
+	delta.x = b.pos.x - a.pos.x;
+	delta.y = b.pos.y - a.pos.y;
+	color_level = 0;
+	color = gradient(a.color, b.color, delta.x, color_level);
+	safe_pixel(fdf->paper, a.pos.x, a.pos.y, color);
+	while (a.pos.x < b.pos.x && a.pos.x < (int)fdf->paper->width)
 	{
-		discriminant = 2 * delta.x + delta.y;
-		while (a.y > b.y)
+		color = gradient(a.color, b.color, delta.x, color_level);
+		if (disc < 0)
 		{
-			if (discriminant < 0)
-			{
-				mlx_put_pixel(fdf->paper, a.x, --a.y, 0xFF9FE5ff);
-				discriminant += 2 * delta.x;
-			}
-			else
-			{
-				mlx_put_pixel(fdf->paper, ++a.x, --a.y, 0xFF9FE5ff);
-				discriminant += 2 * (delta.x + delta.y);
-			}
+			safe_pixel(fdf->paper, ++a.pos.x, a.pos.y, color);
+			disc += 2 * delta.y;
+		}
+		else
+		{
+			safe_pixel(fdf->paper, ++a.pos.x, ++a.pos.y, color);
+			disc += 2 * (delta.y - delta.x);
 		}
 	}
-	return 1;
+}
+
+static void	bresenham3(t_vertex a, t_vertex b, t_fdf_context *fdf, int disc)
+{
+	t_vector2		delta;
+	int				color_level;
+	unsigned int	color;
+
+	delta.x = b.pos.x - a.pos.x;
+	delta.y = b.pos.y - a.pos.y;
+	color_level = 0;
+	color = gradient(a.color, b.color, delta.x, color_level);
+	safe_pixel(fdf->paper, a.pos.x, a.pos.y, color);
+	while (a.pos.y < b.pos.y && a.pos.y < (int)fdf->paper->height)
+	{
+		color = gradient(a.color, b.color, delta.y, ++color_level);
+		if (disc < 0)
+		{
+			safe_pixel(fdf->paper, a.pos.x, ++a.pos.y, color);
+			disc += 2 * delta.x;
+		}
+		else
+		{
+			safe_pixel(fdf->paper, ++a.pos.x, ++a.pos.y, color);
+			disc += 2 * (delta.x - delta.y);
+		}
+	}
+}
+
+static void	bresenham4(t_vertex a, t_vertex b, t_fdf_context *fdf, int disc)
+{
+	t_vector2		delta;
+	int				color_level;
+	unsigned int	color;
+
+	delta.x = b.pos.x - a.pos.x;
+	delta.y = b.pos.y - a.pos.y;
+	color_level = 0;
+	color = gradient(a.color, b.color, delta.x, color_level);
+	safe_pixel(fdf->paper, a.pos.x, a.pos.y, color);
+	while (a.pos.x < b.pos.x && a.pos.x < (int)fdf->paper->width)
+	{
+		color = gradient(a.color, b.color, delta.x, ++color_level);
+		if (disc < 0)
+		{
+			safe_pixel(fdf->paper, ++a.pos.x, a.pos.y, color);
+			disc += 2 * -delta.y;
+		}
+		else
+		{
+			safe_pixel(fdf->paper, ++a.pos.x, --a.pos.y, color);
+			disc += 2 * (-delta.y - delta.x);
+		}
+	}
+}
+
+static void	bresenham5(t_vertex a, t_vertex b, t_fdf_context *fdf, int disc)
+{
+	t_vector2		delta;
+	int				color_level;
+	unsigned int	color;
+
+	delta.x = b.pos.x - a.pos.x;
+	delta.y = b.pos.y - a.pos.y;
+	color_level = 0;
+	color = gradient(a.color, b.color, delta.x, color_level);
+	safe_pixel(fdf->paper, a.pos.x, a.pos.y, color);
+	while (a.pos.y > b.pos.y && a.pos.y > 0)
+	{
+		color = gradient(a.color, b.color, -delta.y, ++color_level);
+		if (disc < 0)
+		{
+			safe_pixel(fdf->paper, a.pos.x, --a.pos.y, color);
+			disc += 2 * delta.x;
+		}
+		else
+		{
+			safe_pixel(fdf->paper, ++a.pos.x, --a.pos.y, color);
+			disc += 2 * (delta.x + delta.y);
+		}
+	}
 }

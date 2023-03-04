@@ -1,0 +1,8 @@
+test*
+*.out
+*.gch
+*.o
+main*
+.vscode
+.DS_Store
+*.a

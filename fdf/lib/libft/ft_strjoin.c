@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/22 18:10:54 by hacho             #+#    #+#             */
-/*   Updated: 2023/03/04 19:31:07 by hacho            ###   ########.fr       */
+/*   Created: 2022/08/10 21:19:03 by hacho             #+#    #+#             */
+/*   Updated: 2022/08/15 18:55:50 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#include <stdlib.h>
+#include "libft.h"
 
-# include "MLX42/MLX42.h"
-# include "map.h"
-# define WINDOW_WIDTH 1800
-# define WINDOW_HEIGHT 1000
-# define DEFAULT_COLOR 0xffffffff
-# define DEFAULT_SCALE 10
-# define OFFSET_X 500
-# define OFFSET_Y 300
-# define Z_CORRECTION 0.3
-
-typedef struct s_fdf_context
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	mlx_t		*mlx;
-	mlx_image_t	*paper;
-	t_world		*world;
-	t_vector2	screen_offset;
-	int			scale;
-}	t_fdf_context;
+	const size_t	s1_len = ft_strlen(s1);
+	const size_t	s2_len = ft_strlen(s2);
+	char			*new_str;
 
-#endif
+	new_str = malloc((s1_len + s2_len + 1) * sizeof(char));
+	if (new_str == NULL)
+		return (NULL);
+	ft_strlcpy(new_str, s1, s1_len + 1);
+	ft_strlcpy(new_str + s1_len, s2, s2_len + 1);
+	return (new_str);
+}
