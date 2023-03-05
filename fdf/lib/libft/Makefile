@@ -48,7 +48,7 @@ SRCS_ADDON	=	ft_split_free.c
 SRCS_GNL	=	get_next_line.c \
 				get_next_line_utils.c
 
-CC = clang
+CC = cc
 CFLAGS = -Wall -Wextra -Werror
 AR = ar
 ARFLAGS = crs

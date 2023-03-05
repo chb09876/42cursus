@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hacho <hacho@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hacho <hacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 19:22:02 by hacho             #+#    #+#             */
-/*   Updated: 2023/03/04 18:26:23 by hacho            ###   ########.fr       */
+/*   Updated: 2023/03/05 12:26:04 by hacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #include <stdlib.h>
 #include "libft.h"
 
-char					*ft_strdup(const char *s1);
-void					*ft_memmove(void *dst, const void *src, size_t len);
 t_buffer_node			*new_buffer_node(
 							int fd, t_buffer_node *next, t_buffer_node *prev);
 static t_gnl_state		gnl_read(int fd, t_read_buffer *buf, t_gnl_status *gnl);
